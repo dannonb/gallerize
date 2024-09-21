@@ -6,6 +6,7 @@ import { auth } from "@/auth";
 import Navbar from "./navbar";
 import UserDropdown from "./user-dropdown";
 import AuthButton from "./login-button";
+import { ModeToggle } from "./theme-toggle";
 
 export default async function Header() {
   const session = await auth();
@@ -26,6 +27,7 @@ export default async function Header() {
             </div>
           </form>
           {session ? <UserDropdown /> : <AuthButton />}
+          <ModeToggle />
         </div>
       </header>
     </>
