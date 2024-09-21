@@ -1,0 +1,84 @@
+"use client";
+
+import Link from "next/link";
+import { useParams, usePathname } from "next/navigation";
+
+export default function DashboardNavbar() {
+  const pathname = usePathname();
+  const params = useParams();
+
+  console.log("params", params)
+
+
+  const determineLinkType = () => {
+    switch (true) {
+      case pathname.includes("overview"):
+        return "overview";
+      case pathname.includes("documentation"):
+        return "documentation";
+      case pathname.includes("settings"):
+        return "settings";
+      default:
+        return "overview";
+    }
+  };
+
+  const links = {
+    overview: [
+      {
+        name: "Upload",
+        href: "/overview/upload",
+      },
+      {
+        name: "Gallery",
+        href: "/overview/gallery",
+      },
+      {
+        name: "Stats",
+        href: "/overview/stats",
+      },
+    ],
+    documentation: [
+      {
+        name: "Uploading Images",
+        href: "/documentation/uploading-images",
+      },
+      {
+        name: "API",
+        href: "/documentation/api",
+      },
+    ],
+    settings: [
+      {
+        name: "General",
+        href: "/settings/general",
+      },
+      {
+        name: "Access",
+        href: "/settings/access",
+      },
+      {
+        name: "Integrations",
+        href: "/settings/integrations",
+      },
+      {
+        name: "Support",
+        href: "/settings/support",
+      },
+      {
+        name: "Advanced",
+        href: "/settings/advanced",
+      },
+    ],
+  };
+
+  return (
+    <nav className="grid gap-4 text-sm text-muted-foreground">
+      {links[determineLinkType()].map((link) => (
+        <Link key={link.href} href={`/dashboard/${params.siteId}${link.href}`} className={pathname === `/dashboard/${params.siteId}${link.href}` ? "font-semibold text-primary" : ""}>
+          {link.name}
+        </Link>
+      ))}
+    </nav>
+  );
+}

@@ -1,4 +1,6 @@
+import { SiteModalProvider } from "@/providers/site-modal-provider";
 import type { Metadata } from "next";
+import { SessionProvider } from "next-auth/react";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
@@ -16,7 +18,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <SessionProvider>
+        <body className={inter.className}>
+          <main className="w-full">
+            <SiteModalProvider />
+            {children}
+          </main>
+        </body>
+      </SessionProvider>
     </html>
   );
 }

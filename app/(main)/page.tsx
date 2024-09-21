@@ -1,9 +1,14 @@
 import { auth } from "@/auth";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 export default async function Home() {
   const session = await auth()
-  console.log(session)
+
+  if (session?.user?.id) {
+    redirect('/dashboard')
+  }
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
