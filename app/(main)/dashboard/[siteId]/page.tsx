@@ -1,9 +1,5 @@
-import { UploadForm } from "@/components/forms/upload-form";
+import { redirect } from "next/navigation"
 
-export default function Dashboard() {
-    return (
-        <div>
-            <UploadForm />
-        </div>
-    )
+export default async function SitePage() {
+    redirect('/dashboard')
 }

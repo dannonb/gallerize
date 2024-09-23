@@ -39,14 +39,11 @@ export const SiteModal = () => {
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
             setLoading(true)
-            // const response = await axios.post('/api/stores', values)
             const site = await CreateSite(values)
 
             if (site) {
                 window.location.assign(`/dashboard/${site.id}/overview/upload`)
             }
-
-            // window.location.assign(`/${response.data.id}/overview`)
         } catch (error) {
             toast.error('Something went wrong')
         } finally {

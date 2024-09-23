@@ -21,6 +21,13 @@ export const CreateSite = async (values: any) => {
             }
         })
 
+        await prisma.gallery.create({
+            data: {
+                name: 'default',
+                siteId: site.id
+            }
+        })
+
         console.log(site)
         return site
     } catch (e) {

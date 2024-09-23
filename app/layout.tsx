@@ -1,5 +1,7 @@
+import { NotFoundModalProvider } from "@/providers/not-found-modal-provider";
 import { SiteModalProvider } from "@/providers/site-modal-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
+import { ToasterProvider } from "@/providers/toast-provider";
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
 import { Inter } from "next/font/google";
@@ -24,6 +26,8 @@ export default function RootLayout({
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <main className="w-full">
               <SiteModalProvider />
+              <NotFoundModalProvider />
+              <ToasterProvider />
               {children}
             </main>
           </ThemeProvider>

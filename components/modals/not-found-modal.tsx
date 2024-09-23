@@ -33,18 +33,14 @@ export const NotFoundModal = () => {
         resolver: zodResolver(formSchema),
         defaultValues: {
             name: '',
-        }
+        },
+        mode: "onChange"
     })
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
             setLoading(true)
-            // const response = await axios.post('/api/stores', values)
-            const site = await CreateSite(values)
-
-            if (site) {
-                window.location.assign(`/dashboard/${site.id}/overview/upload`)
-            }
+            toast.success('Submitted')
 
             // window.location.assign(`/${response.data.id}/overview`)
         } catch (error) {
@@ -52,6 +48,10 @@ export const NotFoundModal = () => {
         } finally {
             setLoading(false)
         }
+    }
+
+    const onReturnToDashboard = () => {
+        window.location.assign(`/dashboard`)
     }
 
     return (
@@ -86,9 +86,9 @@ export const NotFoundModal = () => {
                                 <Button
                                     disabled={loading}
                                     variant='outline'
-                                    onClick={notFoundModal.onClose}
+                                    onClick={onReturnToDashboard}
                                 >
-                                    Cancel
+                                    Dashboard
                                 </Button>
                                 <Button
                                     disabled={loading}

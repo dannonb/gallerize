@@ -7,9 +7,6 @@ export default function DashboardNavbar() {
   const pathname = usePathname();
   const params = useParams();
 
-  console.log("params", params)
-
-
   const determineLinkType = () => {
     switch (true) {
       case pathname.includes("overview"):
@@ -30,8 +27,12 @@ export default function DashboardNavbar() {
         href: "/overview/upload",
       },
       {
-        name: "Gallery",
-        href: "/overview/gallery",
+        name: "Images",
+        href: "/overview/images",
+      },
+      {
+        name: "Galleries",
+        href: "/overview/galleries",
       },
       {
         name: "Stats",
