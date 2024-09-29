@@ -1,5 +1,6 @@
 import { NotFoundModalProvider } from "@/providers/not-found-modal-provider";
 import { SiteModalProvider } from "@/providers/site-modal-provider";
+import { TempUploadModalProvider } from "@/providers/temp-upload-modal-provider";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { ToasterProvider } from "@/providers/toast-provider";
 import type { Metadata } from "next";
@@ -27,6 +28,7 @@ export default function RootLayout({
             <main className="w-full">
               <SiteModalProvider />
               <NotFoundModalProvider />
+              <TempUploadModalProvider />
               <ToasterProvider />
               {children}
             </main>

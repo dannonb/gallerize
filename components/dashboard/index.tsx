@@ -1,7 +1,7 @@
-import EditImagesForm from "../forms/edit-images-form";
-import GalleryForm from "../forms/gallery-form";
-import UploadForm from "../forms/upload-form"
+import UploadPage from "./overview/upload"
 import NotFoundPage from "./not-found";
+import ImagesPage from "./overview/images";
+import GalleriesPage from './overview/galleries'
 
 interface Indexable {
     [key: string]: any;
@@ -9,9 +9,9 @@ interface Indexable {
 
 export const components: Indexable = {
     // Overview Components
-    upload: <UploadForm />,
-    images: <EditImagesForm />,
-    galleries: <GalleryForm />,
+    upload: <UploadPage />,
+    images: <ImagesPage />,
+    galleries: <GalleriesPage />,
 
     notFound: <NotFoundPage />
 }

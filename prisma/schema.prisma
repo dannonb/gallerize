@@ -108,16 +108,18 @@ model Gallery {
 }
 
 model Image {
-  id        String   @id @default(uuid())
-  src       String
-  link      String
-  alt       String
-  siteId    String
-  site      Site     @relation("SiteToImage", fields: [siteId], references: [id])
-  galleryId String
-  gallery   Gallery  @relation("GalleryToImage", fields: [galleryId], references: [id])
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         String   @id @default(uuid())
+  src        String
+  link       String
+  alt        String
+  siteId     String
+  site       Site     @relation("SiteToImage", fields: [siteId], references: [id])
+  galleryId  String
+  gallery    Gallery  @relation("GalleryToImage", fields: [galleryId], references: [id])
+  isArchived Boolean
+  isDraft    Boolean
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
   @@index([siteId])
   @@index([galleryId])

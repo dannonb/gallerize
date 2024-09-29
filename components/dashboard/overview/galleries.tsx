@@ -17,24 +17,19 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { Separator } from "@/components/ui/separator";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useOverviewData } from "@/hooks/use-overview-data";
 import { File, ListFilter, PlusCircle } from "lucide-react";
-import Image from "next/image";
-import { useState } from "react";
-import { IoTrashSharp } from "react-icons/io5";
-import { TbListDetails } from "react-icons/tb";
 
-export default function ImagesPage() {
-  const { images } = useOverviewData();
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { useOverviewData } from "@/hooks/use-overview-data";
 
-  const [open, setOpen] = useState(false);
+export default function GalleriesPage() {
+  const { galleries } = useOverviewData();
   return (
     <Tabs defaultValue="all">
       <div className="flex items-center">
@@ -66,92 +61,33 @@ export default function ImagesPage() {
               <DropdownMenuCheckboxItem>Archived</DropdownMenuCheckboxItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <Button size="sm" variant="outline" className="h-7 gap-1">
-            <File className="h-3.5 w-3.5" />
+          <Button size="sm" className="h-7 gap-1">
+            <PlusCircle className="h-3.5 w-3.5" />
             <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-              Export
+              Add Gallery
             </span>
           </Button>
         </div>
       </div>
       <TabsContent value="all">
-        <Card>
-          {/* <CardHeader>
-            <CardTitle>Im</CardTitle>
+        <Card x-chunk="dashboard-06-chunk-0">
+          <CardHeader>
+            <CardTitle>Galleries</CardTitle>
             <CardDescription>
-              Manage your products and view their sales performance.
+              Manage your galleries to ensure they fit your needs.
             </CardDescription>
-          </CardHeader> */}
+          </CardHeader>
           <CardContent>
-            <div className="flex flex-wrap items-start gap-4 pt-4">
-              {images.map((image) => (
-                <Popover key={image.id} open={open} onOpenChange={setOpen}>
-                  <div className="relative w-[200px] h-[200px] rounded-md overflow-hidden border">
-                    <div className="z-10 absolute top-2 right-2">
-                      <Button
-                        type="button"
-                        onClick={() => {}}
-                        variant="destructive"
-                        size="icon"
-                      >
-                        <IoTrashSharp className="h-4 w-4" />
-                      </Button>
-                    </div>
-                    <div className="z-10 absolute top-2 left-2">
-                      <PopoverTrigger asChild>
-                        <Button type="button" variant="secondary">
-                          <TbListDetails className="h-4 w-4 mr-2" />
-                          <span>Details</span>
-                        </Button>
-                      </PopoverTrigger>
-                    </div>
-                    <Image
-                      fill
-                      className="object-cover"
-                      alt="Image"
-                      src={image?.src}
-                    />
-                  </div>
-                  <PopoverContent>
-                    <div className="grid gap-4">
-                      <div className="space-y-2">
-                        <h4 className="font-medium leading-none">Details</h4>
-                        <p className="text-sm text-muted-foreground">
-                          Set the details for the image.
-                        </p>
-                      </div>
-                      <Separator />
-                      <div className="grid gap-2">
-                        {/* <FormField
-                      control={control}
-                      name={`images.${index}.alt`}
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Alt text</FormLabel>
-                          <FormControl className="col-span-2 h-8">
-                            <Input {...field} />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    /> */}
-                        {/* <FormField
-                      control={control}
-                      name={`images.${index}.link`}
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Image link</FormLabel>
-                          <FormControl className="col-span-2 h-8">
-                            <Input {...field} />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    /> */}
-                      </div>
-                    </div>
-                  </PopoverContent>
-                </Popover>
+            <Accordion type="single" collapsible>
+              {galleries.map((gallery) => (
+                <AccordionItem value={gallery.id}>
+                  <AccordionTrigger>{gallery.name}</AccordionTrigger>
+                  <AccordionContent>
+                    {gallery.id}
+                  </AccordionContent>
+                </AccordionItem>
               ))}
-            </div>
+            </Accordion>
             {/* <Table>
                 <TableHeader>
                   <TableRow>
@@ -436,7 +372,8 @@ export default function ImagesPage() {
           </CardContent>
           <CardFooter>
             <div className="text-xs text-muted-foreground">
-              Showing <strong>{images.length}</strong> images
+              Showing <strong>{galleries.length}</strong>{" "}
+              {galleries.length === 1 ? "gallery" : "galleries"}
             </div>
           </CardFooter>
         </Card>
