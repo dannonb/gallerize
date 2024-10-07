@@ -84,7 +84,7 @@ export default function ImagesPage() {
           <CardContent>
             <div className="flex flex-wrap items-start gap-4 pt-4">
               {images.map((image, index) => (
-                <Popover>
+                <Popover key={index}>
                   <div className="relative w-[200px] h-[200px] rounded-md overflow-hidden border">
                     <PopoverTrigger onClick={() => setCurrentEdit(image.id)}>
                       <Image
