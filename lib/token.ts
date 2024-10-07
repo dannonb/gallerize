@@ -48,7 +48,7 @@ export const createTempLink = async ({
     const userId = session?.user?.id;
 
     if (!userId) {
-      return;
+      return { error: "User id is invalid" }
     }
 
     const payload = {
@@ -70,7 +70,7 @@ export const createTempLink = async ({
     });
 
     if (!savedToken) {
-      return;
+      return { error: 'An error has occured' };
     }
     return `http://localhost:3000/temporary-upload?token=${token}`;
   } catch (e) {
@@ -87,7 +87,7 @@ export const verifyTempLink = async (token: string) => {
     });
 
     if (!savedToken) {
-      return;
+      return { error: 'An error has occured' };
     }
 
     // do some additional checks to make sure not exp, 
