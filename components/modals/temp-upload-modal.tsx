@@ -38,7 +38,7 @@ export const TempUploadModal = () => {
   const [exp, setExp] = useState("3");
   const [galleryId, setGalleryId] = useState(defaultGallery?.id);
   const [count, setCount] = useState("20");
-  const [link, setLink] = useState<string>("");
+  const [link, setLink] = useState<any>("");
 
   const onCopy = (description: string) => {
     navigator.clipboard.writeText(description);
