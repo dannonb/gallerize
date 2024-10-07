@@ -12,8 +12,7 @@ export default async function Header() {
   const session = await auth();
 
   return (
-    <>
-      <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+    <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
         <Navbar isLoggedIn={session ? true : false} />
         <div className="flex w-full items-center gap-4 md:ml-auto md:gap-2 lg:gap-4">
           <form className="ml-auto flex-1 sm:flex-initial">
@@ -30,6 +29,5 @@ export default async function Header() {
           <ModeToggle />
         </div>
       </header>
-    </>
   );
 }
