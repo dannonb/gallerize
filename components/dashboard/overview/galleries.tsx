@@ -80,7 +80,7 @@ export default function GalleriesPage() {
           <CardContent>
             <Accordion type="single" collapsible>
               {galleries.map((gallery) => (
-                <AccordionItem value={gallery.id}>
+                <AccordionItem key={gallery.id} value={gallery.id}>
                   <AccordionTrigger>{gallery.name}</AccordionTrigger>
                   <AccordionContent>
                     <div>{gallery.id}</div>
