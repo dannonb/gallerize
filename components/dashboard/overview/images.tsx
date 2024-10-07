@@ -1,5 +1,6 @@
 "use client";
 
+import EditImageForm from "@/components/forms/edit-images-form";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -17,6 +18,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import ImageDetails from "@/components/ui/image-details";
 import {
   Popover,
   PopoverContent,
@@ -35,6 +37,9 @@ export default function ImagesPage() {
   const { images } = useOverviewData();
 
   const [open, setOpen] = useState(false);
+  const [currentEdit, setCurrentEdit] = useState<string>("")
+
+  const getImageById = images.find((img) => img.id === currentEdit) 
   return (
     <Tabs defaultValue="all">
       <div className="flex items-center">
@@ -52,12 +57,12 @@ export default function ImagesPage() {
               <Button variant="outline" size="sm" className="h-7 gap-1">
                 <ListFilter className="h-3.5 w-3.5" />
                 <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                  Filter
+                  Sort
                 </span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Filter by</DropdownMenuLabel>
+              <DropdownMenuLabel>Sort by</DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuCheckboxItem checked>
                 Active
@@ -76,78 +81,22 @@ export default function ImagesPage() {
       </div>
       <TabsContent value="all">
         <Card>
-          {/* <CardHeader>
-            <CardTitle>Im</CardTitle>
-            <CardDescription>
-              Manage your products and view their sales performance.
-            </CardDescription>
-          </CardHeader> */}
           <CardContent>
             <div className="flex flex-wrap items-start gap-4 pt-4">
-              {images.map((image) => (
-                <Popover key={image.id} open={open} onOpenChange={setOpen}>
+              {images.map((image, index) => (
+                <Popover>
                   <div className="relative w-[200px] h-[200px] rounded-md overflow-hidden border">
-                    <div className="z-10 absolute top-2 right-2">
-                      <Button
-                        type="button"
-                        onClick={() => {}}
-                        variant="destructive"
-                        size="icon"
-                      >
-                        <IoTrashSharp className="h-4 w-4" />
-                      </Button>
-                    </div>
-                    <div className="z-10 absolute top-2 left-2">
-                      <PopoverTrigger asChild>
-                        <Button type="button" variant="secondary">
-                          <TbListDetails className="h-4 w-4 mr-2" />
-                          <span>Details</span>
-                        </Button>
-                      </PopoverTrigger>
-                    </div>
-                    <Image
-                      fill
-                      className="object-cover"
-                      alt="Image"
-                      src={image?.src}
-                    />
+                    <PopoverTrigger onClick={() => setCurrentEdit(image.id)}>
+                      <Image
+                        fill
+                        className="object-cover"
+                        alt="Image"
+                        src={image?.src}
+                      />
+                    </PopoverTrigger>
                   </div>
                   <PopoverContent>
-                    <div className="grid gap-4">
-                      <div className="space-y-2">
-                        <h4 className="font-medium leading-none">Details</h4>
-                        <p className="text-sm text-muted-foreground">
-                          Set the details for the image.
-                        </p>
-                      </div>
-                      <Separator />
-                      <div className="grid gap-2">
-                        {/* <FormField
-                      control={control}
-                      name={`images.${index}.alt`}
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Alt text</FormLabel>
-                          <FormControl className="col-span-2 h-8">
-                            <Input {...field} />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    /> */}
-                        {/* <FormField
-                      control={control}
-                      name={`images.${index}.link`}
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormLabel>Image link</FormLabel>
-                          <FormControl className="col-span-2 h-8">
-                            <Input {...field} />
-                          </FormControl>
-                        </FormItem>
-                      )}
-                    /> */}
-                      </div>
-                    </div>
+                    <EditImageForm image={getImageById} />
                   </PopoverContent>
                 </Popover>
               ))}

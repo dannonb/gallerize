@@ -83,7 +83,12 @@ export default function GalleriesPage() {
                 <AccordionItem value={gallery.id}>
                   <AccordionTrigger>{gallery.name}</AccordionTrigger>
                   <AccordionContent>
-                    {gallery.id}
+                    <div>{gallery.id}</div>
+                    {/* @ts-ignore */}
+                    <div>Images: {gallery.images.length}</div>
+                    <div>Description: {gallery.description || "No description provided"}</div>
+                    {/* <div>Creation date: {n}</div>
+                    <div>Last Updated: {new Date(gallery.updatedAt)}</div> */}
                   </AccordionContent>
                 </AccordionItem>
               ))}

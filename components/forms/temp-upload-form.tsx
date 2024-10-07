@@ -22,9 +22,9 @@ import ImageDetails from "../ui/image-details";
 import { createImages } from "@/actions/images";
 
 interface TempUploadProps {
-    siteId: string;
-    galleryId: string;
-    count: string;
+  siteId: string;
+  galleryId: string;
+  count: string;
 }
 
 const formSchema = z.object({
@@ -32,9 +32,11 @@ const formSchema = z.object({
     z.object({
       src: z.string(),
       alt: z.string().optional(),
-      link: z.string().optional()
+      link: z.string().optional(),
+      isDraft: z.boolean().default(false),
+      isArchived: z.boolean().default(false),
     })
-  )
+  ),
 });
 
 type ProductFormValues = z.infer<typeof formSchema>;
@@ -42,7 +44,6 @@ type ProductFormValues = z.infer<typeof formSchema>;
 const TempUploadForm = ({ siteId, galleryId, count }: TempUploadProps) => {
   const params = useParams();
   const router = useRouter();
-
 
   const [loading, setLoading] = useState(false);
 
@@ -64,15 +65,15 @@ const TempUploadForm = ({ siteId, galleryId, count }: TempUploadProps) => {
       const completeData = data.images.map((image) => ({
         ...image,
         siteId,
-        galleryId
+        galleryId,
       }));
 
       const count = await createImages(completeData);
 
-      let toastMessage = `${count} image(s) have been successfully added, thank you!`
+      let toastMessage = `${count} image(s) have been successfully added, thank you!`;
 
       if (!count) {
-        toastMessage = `There has been an error uploading your images`
+        toastMessage = `There has been an error uploading your images`;
       }
 
       router.refresh();
@@ -88,39 +89,38 @@ const TempUploadForm = ({ siteId, galleryId, count }: TempUploadProps) => {
 
   return (
     <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 w-full"
-        >
-         <div className="flex gap-4">
-         <ImageUpload
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
+        <div className="flex gap-4">
+          <ImageUpload
             multiple={true}
             disabled={loading}
             onChange={(src) =>
               append({
                 src,
                 alt: "",
-                link: ""
+                link: "",
+                isDraft: true,
+                isArchived: false,
               })
             }
           />
           <Button disabled={loading} type="submit">
-              Save
-            </Button>
-         </div>
-          <div className="flex flex-wrap items-start gap-4 pt-4">
-            {fields.map((field, index) => (
-              <ImageDetails
-                key={field.id}
-                control={form.control}
-                field={field}
-                index={index}
-                remove={remove}
-              />
-            ))}
-          </div>
-        </form>
-      </Form>
+            Save
+          </Button>
+        </div>
+        <div className="flex flex-wrap items-start gap-4 pt-4">
+          {fields.map((field, index) => (
+            <ImageDetails
+              key={field.id}
+              control={form.control}
+              field={field}
+              index={index}
+              remove={remove}
+            />
+          ))}
+        </div>
+      </form>
+    </Form>
   );
 };
 

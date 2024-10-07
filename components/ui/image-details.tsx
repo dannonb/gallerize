@@ -15,7 +15,13 @@ import {
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
-import { FormControl, FormField, FormItem, FormLabel } from "./form";
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+} from "./form";
 
 import { useWatch } from "react-hook-form";
 import { Separator } from "./separator";
@@ -97,6 +103,43 @@ export default function ImageDetails({
                 </FormItem>
               )}
             />
+            <div className="flex">
+              <FormField
+                control={control}
+                name={`images.${index}.isDraft`}
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-start space-x-3 space-y-0 p-4">
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                    <div className="space-y-1 leading-none">
+                      <FormLabel>Draft</FormLabel>
+                    </div>
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={control}
+                name={`images.${index}.isArchived`}
+                render={({ field }) => (
+                  <FormItem className="flex flex-row items-start space-x-3 space-y-0 p-4">
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                    <div className="space-y-1 leading-none">
+                      <FormLabel>Archived</FormLabel>
+                    </div>
+                  </FormItem>
+                )}
+              />
+            </div>
+            <Button onClick={() => setOpen(false)}>Okay</Button>
           </div>
         </div>
       </PopoverContent>

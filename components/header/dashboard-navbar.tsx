@@ -59,6 +59,10 @@ export default function DashboardNavbar() {
         href: "/settings/access",
       },
       {
+        name: "API Keys",
+        href: "/settings/api-keys",
+      },
+      {
         name: "Integrations",
         href: "/settings/integrations",
       },

@@ -26,6 +26,9 @@ export default async function Overview({
   const galleries = await prisma.gallery.findMany({
     where: {
         siteId: params.siteId
+    },
+    include: {
+      images: true
     }
   });
 

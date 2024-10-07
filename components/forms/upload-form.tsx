@@ -35,9 +35,11 @@ const formSchema = z.object({
       galleryId: z.string(),
       alt: z.string().optional(),
       link: z.string().optional(),
+      isDraft: z.boolean().default(false),
+      isArchived: z.boolean().default(false)
     })
   ),
-  galleryId: z.string(),
+  galleryId: z.string()
 });
 
 type ProductFormValues = z.infer<typeof formSchema>;
@@ -78,7 +80,7 @@ const UploadForm = () => {
       router.refresh();
       router.push(`/dashboard/${siteId}/overview/images`);
 
-      const toastMessage = `${count} image(s) have been successfully added`
+      const toastMessage = `${count} image(s) successfully added`
       toast.success(toastMessage);
     } catch (error) {
       toast.error("Something went wrong.");
@@ -137,6 +139,8 @@ const UploadForm = () => {
                 src,
                 alt: "",
                 link: "",
+                isDraft: true,
+                isArchived: false,
                 galleryId: "",
               })
             }

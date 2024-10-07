@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 
 import * as THREE from "three";
@@ -128,7 +129,7 @@ function Items({ w = 0.7, gap = 0.15 }) {
 
 export default function Hero() {
   return (
-    <Suspense fallback={null}>` `
+    <Suspense fallback={null}>
       <Canvas
         gl={{ antialias: false }}
         dpr={[1, 1.5]}

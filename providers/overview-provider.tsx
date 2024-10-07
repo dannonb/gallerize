@@ -1,11 +1,12 @@
 'use client'
 
 import { useOverviewData } from '@/hooks/use-overview-data'
+import { Gallery, Image } from '@prisma/client';
 import { useEffect } from 'react';
 
 interface OverviewProviderProps {
-    images: any[];
-    galleries: any[];
+    images: Image[];
+    galleries: Gallery[];
     children: React.ReactNode
 }
 
