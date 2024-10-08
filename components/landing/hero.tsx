@@ -2,11 +2,12 @@
 "use client";
 
 import * as THREE from "three";
-import { useRef, useState, Suspense } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Image as ThreeImage, ScrollControls, Scroll, useScroll } from "@react-three/drei";
+import { Image, ScrollControls, Scroll, useScroll } from "@react-three/drei";
 import { proxy, useSnapshot } from "valtio";
 import { easing } from "maath";
+import { Loader } from "lucide-react";
 
 const material = new THREE.LineBasicMaterial({ color: "white" });
 const geometry = new THREE.BufferGeometry().setFromPoints([
@@ -60,7 +61,7 @@ function Item({ index, position, scale, c = new THREE.Color(), ...props }) {
   const click = () => (state.clicked = index === clicked ? null : index);
   const over = () => hover(true);
   const out = () => hover(false);
-  scale = clicked === index ? [scale[0], 1, 1] : scale
+
   useFrame((state, delta) => {
     const y = scroll.curve(
       index / urls.length - 1.5 / urls.length,
@@ -68,7 +69,7 @@ function Item({ index, position, scale, c = new THREE.Color(), ...props }) {
     );
     easing.damp3(
       ref.current.scale,
-      [clicked === index ? 4 : scale[0], clicked === index ? 5 : 4 + y, 1],
+      [clicked === index ? 4.7 : scale[0], clicked === index ? 5 : 4 + y, 1],
       0.15,
       delta
     );
@@ -95,7 +96,7 @@ function Item({ index, position, scale, c = new THREE.Color(), ...props }) {
     );
   });
   return (
-    <ThreeImage
+    <Image
       ref={ref}
       {...props}
       position={position}
@@ -116,6 +117,9 @@ function Items({ w = 0.7, gap = 0.15 }) {
       horizontal
       damping={0.1}
       pages={(width - xW + urls.length * xW) / width}
+      style={{
+        scrollbarWidth: 'none'
+      }}
     >
       <Minimap />
       <Scroll>
@@ -129,7 +133,7 @@ function Items({ w = 0.7, gap = 0.15 }) {
 
 export default function Hero() {
   return (
-    <Suspense fallback={null}>
+    <Suspense fallback={<Loader />}>
       <Canvas
         gl={{ antialias: false }}
         dpr={[1, 1.5]}

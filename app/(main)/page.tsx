@@ -12,13 +12,13 @@ export default async function Home() {
   }
 
   return (
-    <main className="flex h-full flex-col items-center justify-between p-12">
+    <main className="flex flex-col items-center justify-between p-12">
       <LandingHeading />
-      <div className="w-full h-[600px] scroll-none overflow-y-hidden">
+      <div className="flex w-full h-[600px] items-center justify-center">
         <Hero />
       </div>
 
-      <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
+      {/* <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
         <a
           href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
           className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
@@ -86,7 +86,7 @@ export default async function Home() {
             Instantly deploy your Next.js site to a shareable URL with Vercel.
           </p>
         </a>
-      </div>
+      </div> */}
     </main>
   );
 }
