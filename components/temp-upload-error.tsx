@@ -11,7 +11,7 @@ export default function TempUploadError({ message }: { message: string }) {
         setTimeout(() => {
             router.replace('/')
         }, 3000)
-    }, [])
+    }, [router])
 
     return (
         <div>{message}</div>

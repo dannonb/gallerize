@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Menu, Image } from "lucide-react";
+import { Menu, Image as ImageIcon } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
@@ -55,8 +55,8 @@ export default function Navbar({ isLoggedIn }: NavbarProps) {
           href="/"
           className="flex items-center gap-2 text-lg font-semibold md:text-base"
         >
-          <Image className="h-6 w-6" />
-          <span className="sr-only">Acme Inc</span>
+          <ImageIcon className="h-6 w-6" />
+          <span className="sr-only">Gallereasy</span>
         </Link>
         {links.map((link) => (
           <Link
@@ -86,8 +86,8 @@ export default function Navbar({ isLoggedIn }: NavbarProps) {
               href="#"
               className="flex items-center gap-2 text-lg font-semibold"
             >
-              <Image className="h-6 w-6" />
-              <span className="sr-only">Acme Inc</span>
+              <ImageIcon className="h-6 w-6" />
+              <span className="sr-only">Gallereasy</span>
             </Link>
             {links.map((link) => (
               <Link

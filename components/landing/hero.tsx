@@ -4,7 +4,7 @@
 import * as THREE from "three";
 import { useRef, useState, Suspense } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { Image, ScrollControls, Scroll, useScroll } from "@react-three/drei";
+import { Image as ThreeImage, ScrollControls, Scroll, useScroll } from "@react-three/drei";
 import { proxy, useSnapshot } from "valtio";
 import { easing } from "maath";
 
@@ -95,7 +95,7 @@ function Item({ index, position, scale, c = new THREE.Color(), ...props }) {
     );
   });
   return (
-    <Image
+    <ThreeImage
       ref={ref}
       {...props}
       position={position}

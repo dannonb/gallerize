@@ -58,7 +58,7 @@ export const TempUploadModal = () => {
       };
       makeLink();
     }
-  }, [exp, count, galleryId, tempUploadModal.isOpen]);
+  }, [exp, count, galleryId, siteId, tempUploadModal.isOpen]);
 
   return (
     <Modal
