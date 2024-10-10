@@ -133,7 +133,7 @@ function Items({ w = 0.7, gap = 0.15 }) {
 
 export default function Hero() {
   return (
-    <Suspense fallback={<Loader />}>
+    <Suspense fallback={<Loader className="animate-spin" />}>
       <Canvas
         gl={{ antialias: false }}
         dpr={[1, 1.5]}

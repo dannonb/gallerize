@@ -13,6 +13,8 @@ import { useOverviewData } from "@/hooks/use-overview-data";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
 import { Input } from "../ui/input";
 import { Checkbox } from "../ui/checkbox";
+import { Button } from "../ui/button";
+import { IoTrashOutline, IoTrashSharp } from "react-icons/io5";
 
 interface EditImageProps {
   image: any;
@@ -135,6 +137,15 @@ export default function EditImageForm({ image }: EditImageProps) {
                 </FormItem>
               )}
             />
+          </div>
+          <div className="w-full flex items-center justify-evenly">
+          <Button variant="destructive" onClick={() => {}}>
+              Remove
+            </Button>
+            <Button variant="secondary" onClick={() => {}}>
+              Cancel
+            </Button>
+            <Button onClick={() => {}}>Save</Button>
           </div>
         </div>
       </div>

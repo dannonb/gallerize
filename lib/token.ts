@@ -1,7 +1,8 @@
 "use server";
 
-import { auth } from "@/auth";
 import { SignJWT, jwtVerify } from "jose";
+
+import { auth } from "@/auth";
 import prisma from "./prisma";
 
 interface ICreateLink {
@@ -9,6 +10,7 @@ interface ICreateLink {
   count: string;
   galleryId: string | undefined;
   siteId: string | string[];
+  origin: string;
 }
 
 const secretKey = process.env.JWT_SECRET;
@@ -42,6 +44,7 @@ export const createTempLink = async ({
   count,
   galleryId,
   siteId,
+  origin
 }: ICreateLink) => {
   try {
     const session = await auth();
@@ -72,7 +75,7 @@ export const createTempLink = async ({
     if (!savedToken) {
       return { error: 'An error has occured' };
     }
-    return `http://localhost:3000/temporary-upload?token=${token}`;
+    return `${origin}/temporary-upload?token=${token}`;
   } catch (e) {
     console.log(e);
   }
@@ -105,3 +108,8 @@ export const verifyTempLink = async (token: string) => {
     console.log(e);
   }
 };
+
+export const createAPIKey = () => {
+  const key = crypto.randomUUID()
+  console.log(key)
+}

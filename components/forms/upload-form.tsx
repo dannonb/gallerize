@@ -127,7 +127,7 @@ const UploadForm = () => {
                 </FormItem>
               )}
             />
-            <Button disabled={loading} type="submit">
+            <Button disabled={loading} type="submit" className={form.getValues().images.length >= 1 ? "" : "hidden"}>
               Save
             </Button>
           </div>
@@ -145,7 +145,7 @@ const UploadForm = () => {
               })
             }
           />
-          <div className="flex flex-wrap items-start gap-4 pt-4">
+          <div className="grid grid-cols-2 lg:flex lg:flex-wrap lg:items-start gap-4 pt-4 place-items-center">
             {fields.map((field, index) => (
               <ImageDetails
                 key={field.id}

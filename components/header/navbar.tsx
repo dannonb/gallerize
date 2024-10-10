@@ -2,7 +2,12 @@
 
 import Link from "next/link";
 import { Menu, Image as ImageIcon } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 
@@ -82,23 +87,26 @@ export default function Navbar({ isLoggedIn }: NavbarProps) {
         </SheetTrigger>
         <SheetContent side="left">
           <nav className="grid gap-6 text-lg font-medium">
-            <Link
-              href="#"
-              className="flex items-center gap-2 text-lg font-semibold"
-            >
-              <ImageIcon className="h-6 w-6" />
-              <span className="sr-only">Gallereasy</span>
-            </Link>
-            {links.map((link) => (
+            <SheetClose asChild>
               <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  "text-muted-foreground transition-colors hover:text-foreground"
-                )}
+                href="/"
+                className="flex items-center gap-2 text-lg font-semibold"
               >
-                {link.name}
+                <ImageIcon className="h-6 w-6" />
+                <span className="sr-only">Gallereasy</span>
               </Link>
+            </SheetClose>
+            {links.map((link) => (
+              <SheetClose key={link.href} asChild>
+                <Link
+                  href={link.href}
+                  className={cn(
+                    "text-muted-foreground transition-colors hover:text-foreground"
+                  )}
+                >
+                  {link.name}
+                </Link>
+              </SheetClose>
             ))}
           </nav>
         </SheetContent>

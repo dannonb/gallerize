@@ -78,7 +78,7 @@ export default function DashboardNavbar() {
   };
 
   return (
-    <nav className="grid gap-4 text-sm text-muted-foreground">
+    <nav className="flex overflow-scroll text-nowrap md:grid gap-4 text-sm text-muted-foreground">
       {links[determineLinkType()].map((link) => (
         <Link key={link.href} href={`/dashboard/${params.siteId}${link.href}`} className={pathname === `/dashboard/${params.siteId}${link.href}` ? "font-semibold text-primary" : ""}>
           {link.name}

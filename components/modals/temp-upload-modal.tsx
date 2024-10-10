@@ -22,11 +22,12 @@ import { Clock, GalleryHorizontal, Images } from "lucide-react";
 import { useParams } from "next/navigation";
 import { useOverviewData } from "@/hooks/use-overview-data";
 import { createTempLink } from "@/lib/token";
-import TempUploadPage from "@/app/(main)/(temp)/temporary-upload/page";
+import { useOrigin } from "@/hooks/use-origin";
 
 export const TempUploadModal = () => {
   const tempUploadModal = useTempUploadModal();
   const { galleries } = useOverviewData();
+  const origin = useOrigin();
 
   const { siteId } = useParams();
 
@@ -53,12 +54,13 @@ export const TempUploadModal = () => {
           count,
           galleryId,
           siteId,
+          origin,
         });
         setLink(tempLink);
       };
       makeLink();
     }
-  }, [exp, count, galleryId, siteId, tempUploadModal.isOpen]);
+  }, [exp, count, galleryId, siteId, origin, tempUploadModal.isOpen]);
 
   return (
     <Modal

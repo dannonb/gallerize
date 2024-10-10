@@ -18,7 +18,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { File, ListFilter, PlusCircle } from "lucide-react";
+import { ListFilter, PlusCircle } from "lucide-react";
 
 import {
   Accordion,
@@ -30,17 +30,10 @@ import { useOverviewData } from "@/hooks/use-overview-data";
 
 export default function GalleriesPage() {
   const { galleries } = useOverviewData();
+
   return (
     <Tabs defaultValue="all">
       <div className="flex items-center">
-        <TabsList>
-          <TabsTrigger value="all">All</TabsTrigger>
-          <TabsTrigger value="active">Active</TabsTrigger>
-          <TabsTrigger value="draft">Draft</TabsTrigger>
-          <TabsTrigger value="archived" className="hidden sm:flex">
-            Archived
-          </TabsTrigger>
-        </TabsList>
         <div className="ml-auto flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>

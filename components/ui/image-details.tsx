@@ -48,7 +48,7 @@ export default function ImageDetails({
 
   return (
     <Popover key={field.id} open={open} onOpenChange={setOpen}>
-      <div className="relative w-[200px] h-[200px] rounded-md overflow-hidden border">
+      <div className="relative w-[150px] h-[150px] lg:w-[200px] lg:h-[200px] rounded-md overflow-hidden border">
         <div className="z-10 absolute top-2 right-2">
           <Button
             type="button"
@@ -67,7 +67,7 @@ export default function ImageDetails({
             </Button>
           </PopoverTrigger>
         </div>
-        <Image fill className="object-cover" alt="Image" src={imageData?.src} />
+        <Image fill className="object-cover " alt="Image" src={imageData?.src} />
       </div>
       <PopoverContent>
         <div className="grid gap-4">
