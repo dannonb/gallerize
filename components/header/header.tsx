@@ -12,7 +12,7 @@ export default async function Header() {
   const session = await auth();
 
   return (
-    <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
+    <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6 z-[999]">
       <div>
         <Navbar isLoggedIn={session ? true : false} />
       </div>
