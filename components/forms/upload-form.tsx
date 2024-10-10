@@ -36,10 +36,10 @@ const formSchema = z.object({
       alt: z.string().optional(),
       link: z.string().optional(),
       isDraft: z.boolean().default(false),
-      isArchived: z.boolean().default(false)
+      isArchived: z.boolean().default(false),
     })
   ),
-  galleryId: z.string()
+  galleryId: z.string(),
 });
 
 type ProductFormValues = z.infer<typeof formSchema>;
@@ -47,7 +47,7 @@ type ProductFormValues = z.infer<typeof formSchema>;
 const UploadForm = () => {
   const params = useParams();
   const router = useRouter();
-  
+
   const { galleries } = useOverviewData();
 
   const { siteId } = params;
@@ -80,7 +80,7 @@ const UploadForm = () => {
       router.refresh();
       router.push(`/dashboard/${siteId}/overview/images`);
 
-      const toastMessage = `${count} image(s) successfully added`
+      const toastMessage = `${count} image(s) successfully added`;
       toast.success(toastMessage);
     } catch (error) {
       toast.error("Something went wrong.");
@@ -91,46 +91,39 @@ const UploadForm = () => {
 
   return (
     <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 w-full"
-        >
-          <div className="flex space-x-4">
-            <FormField
-              control={form.control}
-              name="galleryId"
-              render={({ field }) => (
-                <FormItem>
-                  <Select
-                    disabled={loading}
-                    onValueChange={field.onChange}
-                    value={field.value}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue
-                          defaultValue={field.value}
-                          placeholder="Select a gallery"
-                        />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {galleries.map((gallery) => (
-                        <SelectItem key={gallery.id} value={gallery.id}>
-                          {gallery.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <Button disabled={loading} type="submit" className={form.getValues().images.length >= 1 ? "" : "hidden"}>
-              Save
-            </Button>
-          </div>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
+        <div className="flex space-x-4">
+          <FormField
+            control={form.control}
+            name="galleryId"
+            render={({ field }) => (
+              <FormItem>
+                <Select
+                  disabled={loading}
+                  onValueChange={field.onChange}
+                  value={field.value}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue
+                        defaultValue={field.value}
+                        placeholder="Select a gallery"
+                      />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {galleries.map((gallery) => (
+                      <SelectItem key={gallery.id} value={gallery.id}>
+                        {gallery.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
           <ImageUpload
             multiple={true}
             disabled={loading}
@@ -145,19 +138,27 @@ const UploadForm = () => {
               })
             }
           />
-          <div className="grid grid-cols-2 lg:flex lg:flex-wrap lg:items-start gap-4 pt-4 place-items-center">
-            {fields.map((field, index) => (
-              <ImageDetails
-                key={field.id}
-                control={form.control}
-                field={field}
-                index={index}
-                remove={remove}
-              />
-            ))}
-          </div>
-        </form>
-      </Form>
+          <Button
+            disabled={loading}
+            type="submit"
+            className={form.getValues().images.length >= 1 ? "" : "hidden"}
+          >
+            Save
+          </Button>
+        </div>
+        <div className="grid grid-cols-2 lg:flex lg:flex-wrap lg:items-start gap-4 pt-4 place-items-center">
+          {fields.map((field, index) => (
+            <ImageDetails
+              key={field.id}
+              control={form.control}
+              field={field}
+              index={index}
+              remove={remove}
+            />
+          ))}
+        </div>
+      </form>
+    </Form>
   );
 };
 

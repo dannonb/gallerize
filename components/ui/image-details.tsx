@@ -63,7 +63,7 @@ export default function ImageDetails({
           <PopoverTrigger asChild>
             <Button type="button" variant="secondary">
               <TbListDetails className="h-4 w-4 mr-2" />
-              <span>Details</span>
+              <span className="hidden md:flex">Details</span>
             </Button>
           </PopoverTrigger>
         </div>
