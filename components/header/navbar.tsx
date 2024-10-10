@@ -85,7 +85,7 @@ export default function Navbar({ isLoggedIn }: NavbarProps) {
             <span className="sr-only">Toggle navigation menu</span>
           </Button>
         </SheetTrigger>
-        <SheetContent side="left">
+        <SheetContent side="left" className="z-[999]">
           <nav className="grid gap-6 text-lg font-medium">
             <SheetClose asChild>
               <Link

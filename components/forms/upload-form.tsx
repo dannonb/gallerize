@@ -93,6 +93,20 @@ const UploadForm = () => {
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 w-full">
         <div className="flex space-x-4">
+        <ImageUpload
+            multiple={true}
+            disabled={loading}
+            onChange={(src) =>
+              append({
+                src,
+                alt: "",
+                link: "",
+                isDraft: true,
+                isArchived: false,
+                galleryId: "",
+              })
+            }
+          />
           <FormField
             control={form.control}
             name="galleryId"
@@ -124,28 +138,14 @@ const UploadForm = () => {
               </FormItem>
             )}
           />
-          <ImageUpload
-            multiple={true}
-            disabled={loading}
-            onChange={(src) =>
-              append({
-                src,
-                alt: "",
-                link: "",
-                isDraft: true,
-                isArchived: false,
-                galleryId: "",
-              })
-            }
-          />
-          <Button
-            disabled={loading}
-            type="submit"
-            className={form.getValues().images.length >= 1 ? "" : "hidden"}
-          >
-            Save
-          </Button>
         </div>
+        <Button
+          disabled={loading}
+          type="submit"
+          className={form.getValues().images.length >= 1 ? "" : "hidden"}
+        >
+          Save
+        </Button>
         <div className="grid grid-cols-2 lg:flex lg:flex-wrap lg:items-start gap-4 pt-4 place-items-center">
           {fields.map((field, index) => (
             <ImageDetails
