@@ -110,6 +110,5 @@ export const verifyTempLink = async (token: string) => {
 };
 
 export const createAPIKey = () => {
-  const key = crypto.randomUUID()
-  console.log(key)
+  return "sk_gal_" + crypto.randomUUID().replace("-", "")
 }

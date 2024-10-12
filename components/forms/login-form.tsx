@@ -13,6 +13,9 @@ import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 
 import { signIn } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const handleLogin = async (provider: "google" | "github") => {
     signIn(provider, {
@@ -21,6 +24,17 @@ const handleLogin = async (provider: "google" | "github") => {
 }
 
 export default function LoginForm() {
+  const params = useSearchParams()
+ 
+  useEffect(() => {
+    const error = params.get('error')
+
+    if (error === "OAuthAccountNotLinked") {
+      toast.error("Email is already in use")
+    }
+
+  }, [params])
+
   return (
     <div className="flex justify-center items-center h-screen">
       <Card>
