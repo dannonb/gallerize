@@ -80,7 +80,7 @@ export default function ImagesPage() {
       <TabsContent value="all">
         <Card>
           <CardContent>
-            <div className="grid grid-cols-2 lg:flex lg:flex-wrap lg:items-start gap-4 pt-4 place-items-center">
+            <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 gap-8 pt-4 place-items-center">
               {images.map((image, index) => (
                 <PopoverForm
                   key={index}
