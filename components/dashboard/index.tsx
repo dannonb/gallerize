@@ -1,8 +1,9 @@
-import UploadPage from "./overview/upload"
 import NotFoundPage from "./not-found";
+import UploadPage from "./overview/upload"
 import ImagesPage from "./overview/images";
 import GalleriesPage from './overview/galleries'
 
+import GeneralSiteSettingsPage from "./settings/general"
 import APIKeysPage from "./settings/api-keys";
 
 interface Indexable {
@@ -14,8 +15,11 @@ export const components: Indexable = {
     "upload": <UploadPage />,
     "images": <ImagesPage />,
     "galleries": <GalleriesPage />,
+
     // Settings Components
+    "general": <GeneralSiteSettingsPage />,
     "api-keys": <APIKeysPage />,
+
 
     "notFound": <NotFoundPage />
 }
