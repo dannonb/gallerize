@@ -26,7 +26,7 @@ export default async function DashboardLayout({
   });
 
   return (
-    <div className="flex min-h-screen w-full flex-col">
+    <div className="flex w-full flex-col">
       <div className="flex min-h-[calc(100vh_-_theme(spacing.16))] flex-1 flex-col gap-4 bg-muted/40 p-4 md:gap-8 md:p-16">
         <div className="mx-auto grid w-full gap-2">
           <SiteSwitcher items={sites} />
