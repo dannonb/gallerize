@@ -1,8 +1,13 @@
-import { createAPIKey } from "@/lib/token"
+import { ApiAlert } from "@/components/ui/api-alert"
+import { createAPIKey } from "@/lib/utils"
 
 export default function APIKeysPage() {
-    createAPIKey()
+    const apiKey = createAPIKey()
+    console.log(apiKey)
+
     return (
-        <div>API key</div>
+        <div>
+            <ApiAlert title="Api Key" description={apiKey} variant="public" />
+        </div>
     )
 }

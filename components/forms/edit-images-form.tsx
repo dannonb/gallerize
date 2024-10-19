@@ -8,34 +8,49 @@ import { useParams, useRouter } from "next/navigation";
 import { Separator } from "../ui/separator";
 
 import { useOverviewData } from "@/hooks/use-overview-data";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
 import { Input } from "../ui/input";
 import { Checkbox } from "../ui/checkbox";
 import { Button } from "../ui/button";
 import { deleteImage, editImage } from "@/actions/images";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import { useEditImageModal } from "@/hooks/use-edit-image-modal";
+import Image from "next/image";
 
 interface EditImageProps {
   image: any;
-  setOpen: (value: boolean) => void;
 }
 
 const formSchema = z.object({
   src: z.string(),
   galleryId: z.string(),
   alt: z.string().optional(),
-  link: z.string().url().optional(),   
+  link: z.string().optional(),
   isDraft: z.boolean().default(false),
   isArchived: z.boolean().default(false),
 });
 
 type EditImageFormValues = z.infer<typeof formSchema>;
 
-export default function EditImageForm({ image, setOpen }: EditImageProps) {
+export default function EditImageForm({ image }: EditImageProps) {
   const params = useParams();
   const router = useRouter();
 
   const { galleries } = useOverviewData();
+  const editImageModal = useEditImageModal();
 
   const [loading, setLoading] = useState(false);
 
@@ -50,11 +65,11 @@ export default function EditImageForm({ image, setOpen }: EditImageProps) {
       setLoading(true);
 
       console.log(data);
-      const updated = await editImage(image?.id!, data)
-     
-      router.refresh()
+      const updated = await editImage(image?.id!, data);
 
-      if (!updated) return
+      router.refresh();
+
+      if (!updated) return;
 
       const toastMessage = `image ${updated.id} has been updated`;
       toast.success(toastMessage);
@@ -62,7 +77,7 @@ export default function EditImageForm({ image, setOpen }: EditImageProps) {
       toast.error("Something went wrong.");
     } finally {
       setLoading(false);
-      setOpen(false)
+      editImageModal.onClose();
     }
   };
 
@@ -70,9 +85,9 @@ export default function EditImageForm({ image, setOpen }: EditImageProps) {
     try {
       setLoading(true);
 
-      await deleteImage(id)
-      
-      router.refresh()
+      await deleteImage(id);
+
+      router.refresh();
 
       const toastMessage = `image ${id} has been deleted`;
       toast.success(toastMessage);
@@ -80,54 +95,76 @@ export default function EditImageForm({ image, setOpen }: EditImageProps) {
       toast.error("Something went wrong.");
     } finally {
       setLoading(false);
-      setOpen(false)
+      editImageModal.onClose();
     }
-  }
+  };
 
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className="grid gap-4">
+          <div className="flex">
+            <Image
+              width={240}
+              height={240}
+              src={editImageModal.image?.src || ""}
+              alt=""
+            />
+            <div className="flex flex-col items-start space-y-4 text-xs p-4">
+              <p>
+                created: {editImageModal.image?.createdAt.toLocaleDateString()}
+              </p>
+              <p>
+                modified: {editImageModal.image?.updatedAt.toLocaleDateString()}
+              </p>
+              <Button
+                type="button"
+                variant="destructive"
+                disabled={loading}
+                onClick={() => onDelete(image.id)}
+                className="w-full"
+              >
+                Remove
+              </Button>
+            </div>
+          </div>
           <div className="space-y-2">
             <h4 className="font-medium leading-none">Details</h4>
-            <p className="text-sm text-muted-foreground">
-              Edit the details of the image.
-            </p>
           </div>
           <Separator />
           <div className="grid gap-2">
-          <FormField
-            control={form.control}
-            name="galleryId"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Gallery</FormLabel>
-                <Select
-                  disabled={loading}
-                  onValueChange={field.onChange}
-                  value={field.value}
-                  defaultValue={field.value}
-                >
-                  <FormControl>
-                    <SelectTrigger>
-                      <SelectValue
-                        defaultValue={field.value}
-                        placeholder="Select a gallery"
-                      />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {galleries.map((gallery) => (
-                      <SelectItem key={gallery.id} value={gallery.id}>
-                        {gallery.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+            <FormField
+              control={form.control}
+              name="galleryId"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Gallery</FormLabel>
+                  <Select
+                    disabled={loading}
+                    onValueChange={field.onChange}
+                    value={field.value}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue
+                          defaultValue={field.value}
+                          placeholder="Select a gallery"
+                        />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {galleries.map((gallery) => (
+                        <SelectItem key={gallery.id} value={gallery.id}>
+                          {gallery.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="alt"
@@ -188,14 +225,17 @@ export default function EditImageForm({ image, setOpen }: EditImageProps) {
                 )}
               />
             </div>
-            <div className="w-full flex items-center justify-evenly">
-              <Button type="button" variant="destructive" disabled={loading} onClick={() => onDelete(image.id)}>
-                Remove
-              </Button>
-              <Button type="button" variant="secondary" disabled={loading} onClick={() => setOpen(false)}>
+            <div className="w-full flex items-center justify-evenly space-x-4">
+              <Button
+                type="button"
+                variant="secondary"
+                disabled={loading}
+                onClick={() => editImageModal.onClose()}
+                className="w-full"
+              >
                 Cancel
               </Button>
-              <Button type="submit" disabled={loading}>
+              <Button type="submit" disabled={loading} className="w-full">
                 Save
               </Button>
             </div>

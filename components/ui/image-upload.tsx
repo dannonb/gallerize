@@ -8,12 +8,14 @@ import { Button } from "@/components/ui/button";
 // import ImageDetails from "./image-details";
 
 interface ImageUploadProps {
+  max?: number;
   multiple: boolean;
   disabled?: boolean;
   onChange: (value: any) => void;
 }
 
 const ImageUpload: React.FC<ImageUploadProps> = ({
+  max,
   multiple,
   disabled,
   onChange,
@@ -36,7 +38,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
       <CldUploadWidget
         onSuccess={onUpload}
         uploadPreset="r5absd4a"
-        options={{ multiple }}
+        options={{ multiple, maxFiles: max }}
       >
         {({ open }) => {
           const onClick = () => {

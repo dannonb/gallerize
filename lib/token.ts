@@ -1,16 +1,25 @@
 "use server";
 
 import { SignJWT, jwtVerify } from "jose";
+import bcrypt from "bcryptjs" 
 
 import { auth } from "@/auth";
 import prisma from "./prisma";
 
 interface ICreateLink {
+  passcode?: string;
   exp: string;
   count: string;
   galleryId: string | undefined;
   siteId: string | string[];
   origin: string;
+}
+
+interface IPayload {
+  passcode: string | null;
+  count: string | undefined;
+  galleryId: string | undefined;
+  siteId: string | string[];
 }
 
 const secretKey = process.env.JWT_SECRET;
@@ -40,6 +49,7 @@ export async function decrypt(token: string | undefined = "") {
 }
 
 export const createTempLink = async ({
+  passcode,
   exp,
   count,
   galleryId,
@@ -54,11 +64,17 @@ export const createTempLink = async ({
       return { error: "User id is invalid" }
     }
 
-    const payload = {
+    const payload: IPayload = {
+      passcode: null,
       count,
       galleryId,
       siteId,
     };
+
+    if (passcode) {
+      const hashedPasscode = await bcrypt.hash(passcode, 8)
+      payload.passcode = hashedPasscode
+    }
 
     const token = await encrypt(payload, `${exp} hours`);
 
@@ -93,22 +109,42 @@ export const verifyTempLink = async (token: string) => {
       return { error: 'An error has occured' };
     }
 
-    // do some additional checks to make sure not exp, 
-    //or possibly add a code for the user to input and check here
+    const payload = await decrypt(token);
 
-    const deletedToken = await prisma.tempLinkToken.delete({
-      where: {
-        id: savedToken.id
-      }
-    })
-
-    const data = await decrypt(token);
-    return data;
+    return { id: savedToken.id, data: payload };
   } catch (e) {
     console.log(e);
   }
 };
 
-export const createAPIKey = () => {
-  return "sk_gal_" + crypto.randomUUID().replace("-", "")
+export const deleteTempUploadToken = async (id: string) => {
+  try {
+    await prisma.tempLinkToken.delete({
+      where: {
+        id
+      }
+    })
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const compareTokenPasscodes = async (passcode: string, tokenId: string) => {
+  try {
+    const token = await prisma.tempLinkToken.findFirst({
+      where: {
+        id: tokenId
+      }
+    })
+
+    if (!token) {
+      return
+    }
+
+    const payload = await decrypt(token.token)
+    
+    return await bcrypt.compare(passcode, payload.passcode as string)
+  } catch (error) {
+    console.log(error)
+  }
 }

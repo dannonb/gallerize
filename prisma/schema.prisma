@@ -95,6 +95,7 @@ model Site {
   updatedAt    DateTime  @updatedAt
   images       Image[]   @relation("SiteToImage")
   galleries    Gallery[] @relation("SiteToGallery")
+  apiKeys      ApiKey[]  @relation("SiteToApiKey")
 }
 
 model Gallery {
@@ -127,8 +128,20 @@ model Image {
 }
 
 model TempLinkToken {
-  id        String @id @default(uuid())
+  id        String   @id @default(uuid())
   token     String
   siteId    String
   creatorId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ApiKey {
+  id        String   @id @default(uuid())
+  key       String
+  siteId    String
+  site      Site     @relation("SiteToApiKey", fields: [siteId], references: [id])
+  creatorId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

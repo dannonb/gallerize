@@ -10,3 +10,7 @@ export function cn(...inputs: ClassValue[]) {
 export function getComponentBySlug(slug: string) {
   return components[slug] || components.notFound
 }
+
+export function createAPIKey(){
+  return "sk_gal_" + crypto.randomUUID().replaceAll("-", "")
+}
