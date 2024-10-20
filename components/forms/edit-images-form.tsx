@@ -115,7 +115,7 @@ export default function EditImageForm({ image }: EditImageProps) {
     <Drawer>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="flex flex-col md:flex-row gap-4 relative w-[300px] h-[300px] rounded-md overflow-hidden border">
+          <div className="flex flex-col md:flex-row gap-4 relative w-[300px] h-[300px] rounded-md overflow-hidden border mx-auto">
             <div className="z-10 absolute top-2 right-2">
               <Button
                 type="button"
@@ -137,12 +137,12 @@ export default function EditImageForm({ image }: EditImageProps) {
             </div>
             <Image
               fill
-              className="object-cover "
+              className="object-cover"
               alt="Image"
               src={editImageModal.image?.src || ""}
             />
-            <DrawerContent className="absolute">
-              <div className="grid gap-2 z-[99] w-full max-w-lg mx-auto p-8">
+            <DrawerContent>
+              <div className="grid gap-2 w-full max-w-lg mx-auto p-8">
                 <FormField
                   control={form.control}
                   name="galleryId"
