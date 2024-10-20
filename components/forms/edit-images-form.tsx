@@ -29,6 +29,7 @@ import {
 } from "../ui/select";
 import { useEditImageModal } from "@/hooks/use-edit-image-modal";
 import Image from "next/image";
+import { IoTrashSharp } from "react-icons/io5";
 
 interface EditImageProps {
   image: any;
@@ -102,36 +103,38 @@ export default function EditImageForm({ image }: EditImageProps) {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="grid gap-4">
-          <div className="flex">
-            <Image
-              width={240}
-              height={240}
-              src={editImageModal.image?.src || ""}
-              alt=""
-            />
-            <div className="flex flex-col items-start space-y-4 text-xs p-4">
+        <div className="flex flex-col md:flex-row gap-4">
+          <div className="flex flex-col">
+            <div className="relative w-[240px] h-[240px] rounded-md overflow-hidden border">
+              <div className="z-10 absolute top-2 right-2">
+                <Button
+                  type="button"
+                  variant="destructive"
+                  size="icon"
+                  disabled={loading}
+                  onClick={() => onDelete(image.id)}
+                >
+                  <IoTrashSharp className="h-4 w-4" />
+                </Button>
+              </div>
+              <div className="z-10 absolute top-2 left-2"></div>
+              <Image
+                fill
+                className="object-cover "
+                alt="Image"
+                src={editImageModal.image?.src || ""}
+              />
+            </div>
+            <div className="hidden md:flex flex-col items-start space-y-4 text-xs p-4">
               <p>
                 created: {editImageModal.image?.createdAt.toLocaleDateString()}
               </p>
               <p>
                 modified: {editImageModal.image?.updatedAt.toLocaleDateString()}
               </p>
-              <Button
-                type="button"
-                variant="destructive"
-                disabled={loading}
-                onClick={() => onDelete(image.id)}
-                className="w-full"
-              >
-                Remove
-              </Button>
             </div>
           </div>
-          <div className="space-y-2">
-            <h4 className="font-medium leading-none">Details</h4>
-          </div>
-          <Separator />
+          <Separator className="md:hidden" />
           <div className="grid gap-2">
             <FormField
               control={form.control}

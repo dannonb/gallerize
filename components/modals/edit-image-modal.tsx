@@ -17,7 +17,6 @@ export const EditImageModal = () => {
       onClose={editImageModal.onClose}
     >
       <div className="flex flex-col space-y-4">
-        
         <EditImageForm image={editImageModal.image} />
       </div>
     </Modal>
