@@ -48,7 +48,7 @@ export default function ImageDetails({
 
   return (
     <Popover key={field.id} open={open} onOpenChange={setOpen}>
-      <div className="relative w-[120px] h-[120px] sm:w-[150px] sm:h-[150px] lg:w-[200px] lg:h-[200px] rounded-md overflow-hidden border">
+      <div className="relative w-[150px] h-[150px] lg:w-[200px] lg:h-[200px] rounded-md overflow-hidden border">
         <div className="z-10 absolute top-2 right-2">
           <Button
             type="button"

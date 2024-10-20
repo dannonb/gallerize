@@ -131,7 +131,7 @@ export default function EditImageForm({ image }: EditImageProps) {
               <DrawerTrigger asChild>
                 <Button type="button" variant="secondary">
                   <TbListDetails className="h-4 w-4 mr-2" />
-                  <span className="hidden lg:flex">Details</span>
+                  <span>Details</span>
                 </Button>
               </DrawerTrigger>
             </div>
