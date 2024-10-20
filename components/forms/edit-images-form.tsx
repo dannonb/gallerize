@@ -115,7 +115,7 @@ export default function EditImageForm({ image }: EditImageProps) {
     <Drawer>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="flex flex-col md:flex-row gap-4 relative w-[400px] h-[400px] rounded-md overflow-hidden border">
+          <div className="flex flex-col md:flex-row gap-4 relative w-[300px] h-[300px] rounded-md overflow-hidden border">
             <div className="z-10 absolute top-2 right-2">
               <Button
                 type="button"
