@@ -11,8 +11,8 @@ export const EditImageModal = () => {
 
   return (
     <Modal
-      title="Edit Image"
-      description="Edit the details of this image."
+      title="Image Preview"
+      description="View, edit and remove images"
       isOpen={editImageModal.isOpen}
       onClose={editImageModal.onClose}
     >
