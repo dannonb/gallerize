@@ -27,9 +27,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer";
 import { useEditImageModal } from "@/hooks/use-edit-image-modal";
 import Image from "next/image";
 import { IoTrashSharp } from "react-icons/io5";
+import { TbListDetails } from "react-icons/tb";
 
 interface EditImageProps {
   image: any;
@@ -101,150 +112,149 @@ export default function EditImageForm({ image }: EditImageProps) {
   };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
-        <div className="flex flex-col md:flex-row gap-4">
-          <div className="flex flex-col">
-            <div className="relative w-[240px] h-[240px] rounded-md overflow-hidden border">
-              <div className="z-10 absolute top-2 right-2">
-                <Button
-                  type="button"
-                  variant="destructive"
-                  size="icon"
-                  disabled={loading}
-                  onClick={() => onDelete(image.id)}
-                >
-                  <IoTrashSharp className="h-4 w-4" />
-                </Button>
-              </div>
-              <div className="z-10 absolute top-2 left-2"></div>
-              <Image
-                fill
-                className="object-cover "
-                alt="Image"
-                src={editImageModal.image?.src || ""}
-              />
-            </div>
-            <div className="hidden md:flex flex-col items-start space-y-4 text-xs p-4">
-              <p>
-                created: {editImageModal.image?.createdAt.toLocaleDateString()}
-              </p>
-              <p>
-                modified: {editImageModal.image?.updatedAt.toLocaleDateString()}
-              </p>
-            </div>
-          </div>
-          <Separator className="md:hidden" />
-          <div className="grid gap-2">
-            <FormField
-              control={form.control}
-              name="galleryId"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Gallery</FormLabel>
-                  <Select
-                    disabled={loading}
-                    onValueChange={field.onChange}
-                    value={field.value}
-                    defaultValue={field.value}
-                  >
-                    <FormControl>
-                      <SelectTrigger>
-                        <SelectValue
-                          defaultValue={field.value}
-                          placeholder="Select a gallery"
-                        />
-                      </SelectTrigger>
-                    </FormControl>
-                    <SelectContent>
-                      {galleries.map((gallery) => (
-                        <SelectItem key={gallery.id} value={gallery.id}>
-                          {gallery.name}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="alt"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Alt text</FormLabel>
-                  <FormControl className="col-span-2 h-8">
-                    <Input {...field} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="link"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Image link</FormLabel>
-                  <FormControl className="col-span-2 h-8">
-                    <Input {...field} />
-                  </FormControl>
-                </FormItem>
-              )}
-            />
-            <div className="flex">
-              <FormField
-                control={form.control}
-                name="isDraft"
-                render={({ field }) => (
-                  <FormItem className="flex flex-row items-start space-x-3 space-y-0 p-4">
-                    <FormControl>
-                      <Checkbox
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
-                    </FormControl>
-                    <div className="space-y-1 leading-none">
-                      <FormLabel>Draft</FormLabel>
-                    </div>
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="isArchived"
-                render={({ field }) => (
-                  <FormItem className="flex flex-row items-start space-x-3 space-y-0 p-4">
-                    <FormControl>
-                      <Checkbox
-                        checked={field.value}
-                        onCheckedChange={field.onChange}
-                      />
-                    </FormControl>
-                    <div className="space-y-1 leading-none">
-                      <FormLabel>Archived</FormLabel>
-                    </div>
-                  </FormItem>
-                )}
-              />
-            </div>
-            <div className="w-full flex items-center justify-evenly space-x-4">
+    <Drawer>
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)}>
+          <div className="flex flex-col md:flex-row gap-4 relative w-[400px] h-[400px] rounded-md overflow-hidden border">
+            <div className="z-10 absolute top-2 right-2">
               <Button
                 type="button"
-                variant="secondary"
+                variant="destructive"
+                size="icon"
                 disabled={loading}
-                onClick={() => editImageModal.onClose()}
-                className="w-full"
+                onClick={() => onDelete(image.id)}
               >
-                Cancel
-              </Button>
-              <Button type="submit" disabled={loading} className="w-full">
-                Save
+                <IoTrashSharp className="h-4 w-4" />
               </Button>
             </div>
+            <div className="z-10 absolute top-2 left-2">
+              <DrawerTrigger asChild>
+                <Button type="button" variant="secondary">
+                  <TbListDetails className="h-4 w-4 mr-2" />
+                  <span className="hidden lg:flex">Details</span>
+                </Button>
+              </DrawerTrigger>
+            </div>
+            <Image
+              fill
+              className="object-cover "
+              alt="Image"
+              src={editImageModal.image?.src || ""}
+            />
+            <DrawerContent className="absolute">
+              <div className="grid gap-2 z-[99] w-full max-w-lg mx-auto p-8">
+                <FormField
+                  control={form.control}
+                  name="galleryId"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Gallery</FormLabel>
+                      <Select
+                        disabled={loading}
+                        onValueChange={field.onChange}
+                        value={field.value}
+                        defaultValue={field.value}
+                      >
+                        <FormControl>
+                          <SelectTrigger>
+                            <SelectValue
+                              defaultValue={field.value}
+                              placeholder="Select a gallery"
+                            />
+                          </SelectTrigger>
+                        </FormControl>
+                        <SelectContent>
+                          {galleries.map((gallery) => (
+                            <SelectItem key={gallery.id} value={gallery.id}>
+                              {gallery.name}
+                            </SelectItem>
+                          ))}
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="alt"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Alt text</FormLabel>
+                      <FormControl className="col-span-2 h-8">
+                        <Input {...field} />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="link"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Image link</FormLabel>
+                      <FormControl className="col-span-2 h-8">
+                        <Input {...field} />
+                      </FormControl>
+                    </FormItem>
+                  )}
+                />
+                <div className="flex">
+                  <FormField
+                    control={form.control}
+                    name="isDraft"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 p-4">
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                        <div className="space-y-1 leading-none">
+                          <FormLabel>Draft</FormLabel>
+                        </div>
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="isArchived"
+                    render={({ field }) => (
+                      <FormItem className="flex flex-row items-start space-x-3 space-y-0 p-4">
+                        <FormControl>
+                          <Checkbox
+                            checked={field.value}
+                            onCheckedChange={field.onChange}
+                          />
+                        </FormControl>
+                        <div className="space-y-1 leading-none">
+                          <FormLabel>Archived</FormLabel>
+                        </div>
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <div className="w-full flex items-center justify-evenly space-x-4">
+                  <DrawerClose asChild>
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      disabled={loading}
+                      className="w-full"
+                    >
+                      Cancel
+                    </Button>
+                  </DrawerClose>
+                  <Button type="submit" disabled={loading} className="w-full">
+                    Save
+                  </Button>
+                </div>
+              </div>
+            </DrawerContent>
           </div>
-        </div>
-      </form>
-    </Form>
+        </form>
+      </Form>
+    </Drawer>
   );
 }
