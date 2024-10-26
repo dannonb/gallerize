@@ -113,17 +113,21 @@ export default function EditImageForm({ image }: EditImageProps) {
 
   return (
     <Drawer>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="flex flex-col md:flex-row gap-4 relative w-[240px] h-[240px] lg:w-[400px] lg:h-[400px] rounded-md overflow-hidden border mx-auto">
-            <Image
-              fill
-              className="object-cover"
-              alt="Image"
-              src={editImageModal.image?.src || ""}
-            />
-            <DrawerContent>
-              <div className="grid gap-2 w-full max-w-lg mx-auto p-8">
+      <div className="flex flex-col md:flex-row gap-4 relative w-[240px] h-[240px] lg:w-[400px] lg:h-[400px] rounded-md overflow-hidden border mx-auto">
+        <Image
+          fill
+          className="object-cover"
+          alt="Image"
+          src={editImageModal.image?.src || ""}
+        />
+        <DrawerContent>
+          <DrawerTitle className="sr-only">Edit Image</DrawerTitle>
+          <DrawerDescription className="sr-only">
+            Edit selected image
+          </DrawerDescription>
+          <div className="grid gap-2 w-full max-w-lg mx-auto p-8">
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)}>
                 <FormField
                   control={form.control}
                   name="galleryId"
@@ -231,32 +235,32 @@ export default function EditImageForm({ image }: EditImageProps) {
                     Save
                   </Button>
                 </div>
-              </div>
-            </DrawerContent>
+              </form>
+            </Form>
           </div>
-          <div className="w-full flex items-center justify-center space-x-4 pt-8">
-          <div>
-              <Button
-                type="button"
-                variant="destructive"
-                disabled={loading}
-                onClick={() => onDelete(image.id)}
-              >
-                <IoTrashSharp className="h-4 w-4" />
-                <span>Remove</span>
-              </Button>
-            </div>
-            <div>
-              <DrawerTrigger asChild>
-                <Button type="button" variant="secondary">
-                  <TbListDetails className="h-4 w-4 mr-2" />
-                  <span>Details</span>
-                </Button>
-              </DrawerTrigger>
-            </div>
-          </div>
-        </form>
-      </Form>
+        </DrawerContent>
+      </div>
+      <div className="w-full flex items-center justify-center space-x-4 pt-8">
+        <div>
+          <Button
+            type="button"
+            variant="destructive"
+            disabled={loading}
+            onClick={() => onDelete(image.id)}
+          >
+            <IoTrashSharp className="h-4 w-4" />
+            <span>Remove</span>
+          </Button>
+        </div>
+        <div>
+          <DrawerTrigger asChild>
+            <Button type="button" variant="secondary">
+              <TbListDetails className="h-4 w-4 mr-2" />
+              <span>Details</span>
+            </Button>
+          </DrawerTrigger>
+        </div>
+      </div>
     </Drawer>
   );
 }
