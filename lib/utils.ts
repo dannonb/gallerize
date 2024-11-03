@@ -11,6 +11,6 @@ export function getComponentBySlug(slug: string) {
   return components[slug] || components.notFound
 }
 
-export function createAPIKey(){
+export function newAPIKey(){
   return "sk_gal_" + crypto.randomUUID().replaceAll("-", "")
 }

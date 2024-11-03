@@ -10,17 +10,19 @@ import { Button } from "@/components/ui/button";
 interface ApiAlertProps {
     title: string;
     description: string;
-    variant: "public" | "admin"
+    variant: "public" | "admin" | "secret"
 }
 
 const textMap: Record<ApiAlertProps["variant"], string> = {
     public: "Public",
-    admin: "Admin"
+    admin: "Admin",
+    secret: "Secret"
 }
 
 const variantMap: Record<ApiAlertProps["variant"], BadgeProps["variant"]> = {
     public: "secondary",
-    admin: "destructive"
+    admin: "destructive",
+    secret: "outline"
 }
 
 export const ApiAlert: React.FC<ApiAlertProps> = ({
