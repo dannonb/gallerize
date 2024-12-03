@@ -16,7 +16,7 @@ export default function LandingHeading() {
             New
           </span>{" "}
           <span className="text-sm font-medium">
-            Gallerease is out! See what's new
+            Gallerease is out! See what&apos;s new
           </span>
           <svg
             className="ml-2 w-5 h-5"
