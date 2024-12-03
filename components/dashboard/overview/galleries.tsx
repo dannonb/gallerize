@@ -29,10 +29,35 @@ import {
 import { useOverviewData } from "@/hooks/use-overview-data";
 import { GalleryModalProvider } from "@/providers/gallery-modal-provider";
 import { useGalleryModal } from "@/hooks/use-gallery-modal";
+import { useState } from "react";
+import { deleteGallery } from "@/actions/galleries";
+import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 export default function GalleriesPage() {
   const { galleries } = useOverviewData();
   const galleryModal = useGalleryModal();
+
+  const router = useRouter()
+
+  const [loading, setLoading] = useState(false)
+
+  const onDelete = async (id: string) => {
+    try {
+      setLoading(true);
+
+      await deleteGallery(id);
+
+      router.refresh();
+
+      const toastMessage = `gallery ${id} has been deleted`;
+      toast.success(toastMessage);
+    } catch (error) {
+      toast.error("Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -95,12 +120,16 @@ export default function GalleriesPage() {
                       {/* <div>Creation date: {n}</div>
                     <div>Last Updated: {new Date(gallery.updatedAt)}</div> */}
                       <div className="flex mt-4 space-x-4">
-                        <Button variant="destructive" size="icon">
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                        <Button size="icon">
-                          <Settings2 className="h-4 w-4" />
-                        </Button>
+                        {gallery.name !== "default" && (
+                          <>
+                            <Button variant="destructive" size="icon" onClick={() => onDelete(gallery.id)}>
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                            {/* <Button size="icon" onClick={() => setIsEditing(true)}>
+                              <Settings2 className="h-4 w-4" />
+                            </Button> */}
+                          </>
+                        )}
                         <Button variant="secondary" size="icon">
                           <Code2 className="h-4 w-4" />
                         </Button>

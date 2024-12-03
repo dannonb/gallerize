@@ -32,7 +32,7 @@ export default function Navbar({ isLoggedIn }: NavbarProps) {
     },
     {
       name: "Settings",
-      href: `/dashboard/${params.siteId}/settings/general`,
+      href: `/dashboard/${params.siteId}/settings/api-keys`,
     },
   ];
 

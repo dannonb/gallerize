@@ -34,10 +34,10 @@ export default function DashboardNavbar() {
         name: "Galleries",
         href: "/overview/galleries",
       },
-      {
-        name: "Stats",
-        href: "/overview/stats",
-      },
+      // {
+      //   name: "Stats",
+      //   href: "/overview/stats",
+      // },
     ],
     documentation: [
       {
@@ -50,30 +50,30 @@ export default function DashboardNavbar() {
       },
     ],
     settings: [
-      {
-        name: "General",
-        href: "/settings/general",
-      },
-      {
-        name: "Access",
-        href: "/settings/access",
-      },
+      // {
+      //   name: "General",
+      //   href: "/settings/general",
+      // },
+      // {
+      //   name: "Access",
+      //   href: "/settings/access",
+      // },
       {
         name: "API Keys",
         href: "/settings/api-keys",
       },
-      {
-        name: "Integrations",
-        href: "/settings/integrations",
-      },
+      // {
+      //   name: "Integrations",
+      //   href: "/settings/integrations",
+      // },
       {
         name: "Support",
         href: "/settings/support",
       },
-      {
-        name: "Advanced",
-        href: "/settings/advanced",
-      },
+      // {
+      //   name: "Advanced",
+      //   href: "/settings/advanced",
+      // },
     ],
   };
 

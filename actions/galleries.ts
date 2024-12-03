@@ -31,3 +31,55 @@ export const createGallery = async (siteId: string, data: any) => {
         console.log(error)
     }   
 }
+
+export const editGallery = async (id: string, data: any) => {
+    try {
+        const isDefault = await prisma.gallery.count({
+            where: {
+                id,
+                name: "default"
+            }
+        })
+
+        if (isDefault) {
+            return
+        }
+
+        const updatedGallery = await prisma.gallery.update({
+            where: {
+              id,
+            },
+            data,
+          });
+
+          console.log(updatedGallery)
+
+          return updatedGallery
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export const deleteGallery = async (id: string) => {
+    try {
+        const isDefault = await prisma.gallery.count({
+            where: {
+                id,
+                name: "default"
+            }
+        })
+
+        if (isDefault) {
+            return
+        }
+
+        const deletedGallery = await prisma.gallery.delete({
+            where: { id },
+          });
+      
+          console.log(deletedGallery);
+          return deletedGallery;
+    } catch (error) {
+        console.log(error)
+    }
+}

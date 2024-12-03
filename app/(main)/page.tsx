@@ -14,7 +14,7 @@ export default async function Home() {
   return (
     <main className="flex flex-col w-full items-center justify-between p-12">
       <LandingHeading />
-      <div className="flex w-full h-96 xl:h-[670px] items-center justify-center">
+      <div className="flex w-full h-96 items-center justify-center">
         <Hero />
       </div>
 
