@@ -37,3 +37,18 @@ export const CreateSite = async (values: any) => {
     console.log(e);
   }
 };
+
+export const getFirstSite = async () => {
+  const session = await auth();
+  const userId = session?.user?.id;
+
+  if (!userId) {
+    return;
+  }
+
+  const site = await prisma.site.findFirst({
+    where: {
+      
+    }
+  })
+}

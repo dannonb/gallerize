@@ -4,7 +4,6 @@ import { useState } from "react";
 import Image from "next/image";
 import { IoTrashSharp } from "react-icons/io5";
 import { TbListDetails } from "react-icons/tb";
-import { cn } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -48,7 +47,7 @@ export default function ImageDetails({
 
   return (
     <Popover key={field.id} open={open} onOpenChange={setOpen}>
-      <div className="relative w-[150px] h-[150px] lg:w-[200px] lg:h-[200px] rounded-md overflow-hidden border">
+      <div className="relative w-[100px] h-[100px] lg:w-[200px] lg:h-[200px] rounded-md overflow-hidden border">
         <div className="z-10 absolute top-2 right-2">
           <Button
             type="button"

@@ -31,7 +31,7 @@ const tempUploadFormSchema = z.object({
   passcode: z.string().optional(),
   exp: z.enum(["1", "3", "12"]),
   count: z.string(),
-  galleryId: z.string(),
+  galleryId: z.string({ message: "please include the gallery you would like these images uploaded to" }),
 });
 
 export const TempUploadModal = () => {

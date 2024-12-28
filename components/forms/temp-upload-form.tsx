@@ -105,6 +105,7 @@ const TempUploadForm = ({
   };
 
   return (
+    <div className="w-full flex flex-col space-y-8">
     <Card className="w-full">
       <CardHeader>
         <CardTitle>Quick Upload</CardTitle>
@@ -114,45 +115,47 @@ const TempUploadForm = ({
         </CardDescription>
       </CardHeader>
       <CardContent className="">
-        <Form {...form}>
-          <form
-            onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-8 w-full"
-          >
-            <div className="flex gap-4">
-              <ImageUpload
-                max={parseInt(count)}
-                multiple={true}
-                disabled={loading}
-                onChange={(src) =>
-                  append({
-                    src,
-                    alt: "",
-                    link: "",
-                    isDraft: true,
-                    isArchived: false,
-                  })
-                }
-              />
-              <Button disabled={loading} type="submit">
-                Save
-              </Button>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-6 gap-4 pt-4 place-items-center">
-              {fields.map((field, index) => (
-                <ImageDetails
-                  key={field.id}
-                  control={form.control}
-                  field={field}
-                  index={index}
-                  remove={remove}
-                />
-              ))}
-            </div>
-          </form>
-        </Form>
+        
       </CardContent>
     </Card>
+    <Form {...form}>
+    <form
+      onSubmit={form.handleSubmit(onSubmit)}
+      className="space-y-8 w-full"
+    >
+      <div className="flex gap-4">
+        <ImageUpload
+          max={parseInt(count)}
+          multiple={true}
+          disabled={loading}
+          onChange={(src) =>
+            append({
+              src,
+              alt: "",
+              link: "",
+              isDraft: true,
+              isArchived: false,
+            })
+          }
+        />
+        <Button disabled={loading} type="submit">
+          Save
+        </Button>
+      </div>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-6 gap-4 pt-4 place-items-center">
+        {fields.map((field, index) => (
+          <ImageDetails
+            key={field.id}
+            control={form.control}
+            field={field}
+            index={index}
+            remove={remove}
+          />
+        ))}
+      </div>
+    </form>
+  </Form>
+  </div>
   );
 };
 

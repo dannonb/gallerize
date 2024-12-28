@@ -31,16 +31,18 @@ import { GalleryModalProvider } from "@/providers/gallery-modal-provider";
 import { useGalleryModal } from "@/hooks/use-gallery-modal";
 import { useState } from "react";
 import { deleteGallery } from "@/actions/galleries";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 export default function GalleriesPage() {
   const { galleries } = useOverviewData();
   const galleryModal = useGalleryModal();
 
-  const router = useRouter()
+  const router = useRouter();
+  const params = useParams();
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
 
   const onDelete = async (id: string) => {
     try {
@@ -122,7 +124,11 @@ export default function GalleriesPage() {
                       <div className="flex mt-4 space-x-4">
                         {gallery.name !== "default" && (
                           <>
-                            <Button variant="destructive" size="icon" onClick={() => onDelete(gallery.id)}>
+                            <Button
+                              variant="destructive"
+                              size="icon"
+                              onClick={() => onDelete(gallery.id)}
+                            >
                               <Trash2 className="h-4 w-4" />
                             </Button>
                             {/* <Button size="icon" onClick={() => setIsEditing(true)}>
@@ -130,8 +136,12 @@ export default function GalleriesPage() {
                             </Button> */}
                           </>
                         )}
-                        <Button variant="secondary" size="icon">
-                          <Code2 className="h-4 w-4" />
+                        <Button asChild variant="secondary" size="icon">
+                          <Link
+                            href={`/dashboard/${params.siteId}/documentation/api`}
+                          >
+                            <Code2 className="h-4 w-4" />
+                          </Link>
                         </Button>
                       </div>
                     </AccordionContent>

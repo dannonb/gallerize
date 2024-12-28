@@ -12,6 +12,8 @@ import { Button } from "../ui/button";
 import { cn } from "@/lib/utils";
 
 import { usePathname, useParams } from "next/navigation";
+import { useEffect } from "react";
+import { useSiteParams } from "@/hooks/use-site-params";
 
 interface NavbarProps {
   isLoggedIn: boolean;
@@ -20,6 +22,26 @@ interface NavbarProps {
 export default function Navbar({ isLoggedIn }: NavbarProps) {
   const pathname = usePathname();
   const params = useParams();
+
+  const { lastActiveSite, setLastActiveSite } = useSiteParams((state) => state);
+
+  const handleCurrentSite = async () => {
+    if (isLoggedIn) {
+      const siteParam = params.siteId
+
+      if (siteParam && siteParam !== null && siteParam !== lastActiveSite) {
+        const param = typeof siteParam === "string" ? siteParam : siteParam[0]
+        setLastActiveSite(param)
+      } 
+
+    } else {
+      setLastActiveSite(null)
+    }
+  }
+
+  useEffect(() => {
+    handleCurrentSite()
+  }, [params.siteId, isLoggedIn]);
 
   const dashboardLinks = [
     {
@@ -61,7 +83,7 @@ export default function Navbar({ isLoggedIn }: NavbarProps) {
           className="flex items-center gap-2 text-lg font-semibold md:text-base"
         >
           <ImageIcon className="h-6 w-6" />
-          <span className="sr-only">Gallereasy</span>
+          <span className="sr-only">Gallerease</span>
         </Link>
         {links.map((link) => (
           <Link
@@ -93,7 +115,7 @@ export default function Navbar({ isLoggedIn }: NavbarProps) {
                 className="flex items-center gap-2 text-lg font-semibold"
               >
                 <ImageIcon className="h-6 w-6" />
-                <span className="sr-only">Gallereasy</span>
+                <span className="sr-only">Gallerease</span>
               </Link>
             </SheetClose>
             {links.map((link) => (

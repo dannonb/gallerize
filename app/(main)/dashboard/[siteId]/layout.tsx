@@ -9,14 +9,30 @@ import { EditImageModalProvider } from "@/providers/edit-image-modal-provider";
 
 export default async function DashboardLayout({
   children,
+  params
 }: Readonly<{
   children: React.ReactNode;
+  params: { siteId: string | null }
 }>) {
   const session = await auth();
   const userId = session?.user?.id;
 
   if (!session) {
     redirect("/api/auth/login?callbackUrl=/dashboard");
+  }
+
+  if (!params.siteId || params.siteId === 'null') {
+    const site = await prisma.site.findFirst({
+      where: {
+        userId,
+      }
+    })
+
+    if (!site) {
+      redirect('/')
+    }
+
+    redirect(`/dashboard/${site.id}/overview/upload`)
   }
 
   const sites = await prisma.site.findMany({

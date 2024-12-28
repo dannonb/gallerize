@@ -10,7 +10,7 @@ export const createApiKey = async (siteId: string, creatorId: string) => {
     const userId = session?.user?.id;
 
     if (!userId || !siteId) {
-      return;
+      throw new Error("Access Denied")
     }
 
     const existingKey = await prisma.apiKey.findFirst({
@@ -21,7 +21,7 @@ export const createApiKey = async (siteId: string, creatorId: string) => {
 
     if (existingKey) {
       console.log("An api key already exists for this site");
-      return;
+      throw new Error("An API key already exists for this account");
     }
 
     const key = newAPIKey();
@@ -34,7 +34,7 @@ export const createApiKey = async (siteId: string, creatorId: string) => {
     });
 
     if (!dbKey) {
-      return;
+      throw new Error("Error ocurred saving API key");
     }
 
     return key;
@@ -112,8 +112,6 @@ export const getApiKey = async (siteId: string) => {
         id: siteId,
       },
     });
-
-    console.log(site);
 
     if (!site) return;
 

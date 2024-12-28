@@ -1,6 +1,6 @@
-import { Search } from "lucide-react";
+// import { Search } from "lucide-react";
 
-import { Input } from "@/components/ui/input";
+// import { Input } from "@/components/ui/input";
 
 import { auth } from "@/auth";
 import Navbar from "./navbar";
@@ -17,7 +17,7 @@ export default async function Header() {
         <Navbar isLoggedIn={session ? true : false} />
       </div>
       <div className="flex items-center gap-4 ml-auto md:gap-2 lg:gap-4">
-        <form className="ml-auto flex-1 sm:flex-initial">
+        {/* <form className="ml-auto flex-1 sm:flex-initial">
           <div className="relative">
             <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
             <Input
@@ -26,7 +26,7 @@ export default async function Header() {
               className="pl-8 sm:w-[300px] md:w-[200px] lg:w-[300px]"
             />
           </div>
-        </form>
+        </form> */}
         {session ? <UserDropdown /> : <AuthButton />}
         <ModeToggle />
       </div>

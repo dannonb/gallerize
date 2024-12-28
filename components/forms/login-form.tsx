@@ -14,17 +14,19 @@ import { FaGithub } from "react-icons/fa";
 
 import { signIn } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import toast from "react-hot-toast";
-
-const handleLogin = async (provider: "google" | "github") => {
-    signIn(provider, {
-        callbackUrl: '/dashboard'
-    });
-}
 
 export default function LoginForm() {
   const params = useSearchParams()
+
+  const redirect = params.get('redirect')
+
+  const handleLogin = async (provider: "google" | "github") => {
+    signIn(provider, {
+        callbackUrl: redirect ? redirect : '/dashboard'
+    });
+}
  
   useEffect(() => {
     const error = params.get('error')

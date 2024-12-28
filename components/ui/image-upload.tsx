@@ -37,7 +37,7 @@ const ImageUpload: React.FC<ImageUploadProps> = ({
     <div>
       <CldUploadWidget
         onSuccess={onUpload}
-        uploadPreset="r5absd4a"
+        uploadPreset="from-web-app"
         options={{ multiple, maxFiles: max }}
       >
         {({ open }) => {
