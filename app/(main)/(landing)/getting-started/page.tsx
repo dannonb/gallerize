@@ -58,7 +58,7 @@ export default function GettingStartedPage() {
                 Once the site is created, select it and click{" "}
                 <strong>Add Gallery</strong>.
                 <ul className="list-disc list-inside ml-6">
-                  <li>Enter the gallery name (e.g., "Homepage Gallery").</li>
+                  <li>Enter the gallery name (e.g., &quot;Homepage Gallery&quot;).</li>
                   <li>Add a description or tags to organize your galleries.</li>
                 </ul>
               </li>
@@ -124,8 +124,8 @@ export default function GettingStartedPage() {
                 <strong>Generate New Key</strong>.
                 <ul className="list-disc list-inside ml-6">
                   <li>
-                    Provide a name for the key (e.g., "Client A Gallery
-                    Access").
+                    Provide a name for the key (e.g., &quot;Client A Gallery
+                    Access&quot;).
                   </li>
                 </ul>
               </li>
