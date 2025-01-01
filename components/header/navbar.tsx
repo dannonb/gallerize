@@ -14,6 +14,7 @@ import { cn } from "@/lib/utils";
 import { usePathname, useParams } from "next/navigation";
 import { useEffect } from "react";
 import { useSiteParams } from "@/hooks/use-site-params";
+import Image from "next/image";
 
 interface NavbarProps {
   isLoggedIn: boolean;
@@ -80,9 +81,10 @@ export default function Navbar({ isLoggedIn }: NavbarProps) {
       <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
         <Link
           href="/"
-          className="flex items-center gap-2 text-lg font-semibold md:text-base"
+          className="flex items-center gap-2 text-lg font-semibold md:text-base transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-200"
         >
-          <ImageIcon className="h-6 w-6" />
+          {/* <ImageIcon className="h-6 w-6" /> */}
+          <Image src="/logo.png" alt="logo" height={70} width={70} />
           <span className="sr-only">Gallerease</span>
         </Link>
         {links.map((link) => (

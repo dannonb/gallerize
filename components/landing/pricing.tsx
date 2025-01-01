@@ -60,9 +60,9 @@ export default async function Pricing() {
             </ul>
             <Button
               disabled={true}
-              className="text-white bg-gradient-to-tr from-indigo-800 via-blue-600 to-cyan-400 focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:text-white  dark:focus:ring-primary-900"
+              className="focus:ring-4 focus:ring-primary-200 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900"
             >
-              {tier.label !== "Starter" ? "Coming soon..." : !userId ? "Sign in" : "Current plan"}
+              {tier.label !== "Starter" ? "Coming soon..." : "Current plan"}
             </Button>
           </div>
           ))}

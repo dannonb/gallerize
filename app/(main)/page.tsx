@@ -12,13 +12,17 @@ export default async function Home() {
   }
 
   return (
-    <main className="flex flex-col w-full items-center justify-between p-12 relative border h-screen">
-      <div className="z-[1000]">
-        <LandingHeading />
+    <main className="flex flex-col w-full items-center justify-between relative h-full">
+      <div className="xl:bg-[url('/bg-test.png')] bg-no-repeat bg-cover bg-fixed h-full w-full">
+        <div className="bg-gray-200 h-full bg-opacity-90 lg:p-12 dark:bg-gray-900 dark:bg-opacity-90">
+          <div className="z-[999] relative">
+            <LandingHeading />
+          </div>
+          <div className="hidden sm:flex h-[500px] xl:h-[600px] fixed -bottom-14 xl:-bottom-30 left-0 w-full items-center justify-center -translate-y-400">
+            <Hero />
+          </div>
+        </div>
       </div>
-      {/* <div className="flex h-[900px] absolute top-45 left-0 w-full items-center justify-center -translate-y-400">
-        <Hero />
-      </div> */}
 
       {/* <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
         <a
