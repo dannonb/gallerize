@@ -14,7 +14,7 @@ export default async function Home() {
   return (
     <main className="flex flex-col w-full items-center justify-between relative h-full">
       <div className="xl:bg-[url('/bg-test.png')] bg-no-repeat bg-cover bg-fixed h-full w-full">
-        <div className="bg-gray-200 h-full bg-opacity-90 lg:p-12 dark:bg-gray-900 dark:bg-opacity-90">
+        <div className="xl:bg-gray-200 h-full bg-opacity-90 lg:p-12 xl:dark:bg-gray-900 dark:bg-opacity-90">
           <div className="relative">
             <LandingHeading />
           </div>
