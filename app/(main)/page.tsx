@@ -14,11 +14,11 @@ export default async function Home() {
   return (
     <main className="flex flex-col w-full items-center justify-between relative h-full">
       <div className="xl:bg-[url('/bg-test.png')] bg-no-repeat bg-cover bg-fixed h-full w-full">
-        <div className="xl:bg-gray-200 h-full bg-opacity-90 lg:p-12 xl:dark:bg-gray-900 dark:bg-opacity-90">
+        <div className="xl:bg-gray-200 h-full xl:bg-opacity-90 lg:p-12 xl:dark:bg-gray-900 xl:dark:bg-opacity-90">
           <div className="relative">
             <LandingHeading />
           </div>
-          <div className="hidden sm:flex h-[500px] xl:h-[600px] fixed -bottom-14 xl:-bottom-30 left-0 w-full items-center justify-center -translate-y-400">
+          <div className="hidden sm:flex h-[500px] fixed -bottom-2 xl:-bottom-30 left-0 w-full items-center justify-center -translate-y-400">
             <Hero />
           </div>
         </div>
