@@ -12,11 +12,13 @@ export default async function Home() {
   }
 
   return (
-    <main className="flex flex-col w-full items-center justify-between p-12">
-      <LandingHeading />
-      <div className="flex w-full h-96 items-center justify-center">
-        <Hero />
+    <main className="flex flex-col w-full items-center justify-between p-12 relative border h-screen">
+      <div className="z-[1000]">
+        <LandingHeading />
       </div>
+      {/* <div className="flex h-[900px] absolute top-45 left-0 w-full items-center justify-center -translate-y-400">
+        <Hero />
+      </div> */}
 
       {/* <div className="mb-32 grid text-center lg:mb-0 lg:w-full lg:max-w-5xl lg:grid-cols-4 lg:text-left">
         <a

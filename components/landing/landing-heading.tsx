@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Button } from "../ui/button";
+import Hero from "./hero";
 
 export default function LandingHeading() {
   return (

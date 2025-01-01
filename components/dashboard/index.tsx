@@ -12,6 +12,7 @@ import SupportPage from "./settings/support";
 import AdvancedSettingsPage from "./settings/advanced";
 import UploadingImagesDocs from "./documentation/uploading-images";
 import APIDocsPage from "./documentation/api";
+import Stats from "./overview/stats";
 
 interface Indexable {
   [key: string]: any;
@@ -22,10 +23,13 @@ export const components: Indexable = {
   upload: <UploadPage />,
   images: <ImagesPage />,
   galleries: <GalleriesPage />,
+  stats: <Stats params={{siteId: ""}} />,
 
   // Documentation Components
   "uploading-images": <UploadingImagesDocs />,
   api: <APIDocsPage />,
+
+
   // Settings Components
   general: <GeneralSiteSettingsPage />,
   access: <AccessPage />,

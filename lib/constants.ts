@@ -6,7 +6,7 @@ export const tiers = {
     maxSites: 3,
     maxGalleriesPerSite: 3,
     maxImagesPerGallery: 50,
-    totalStorageGB: 5,
+    totalStorageGB: 10,
   },
   basic: {
     name: "basic",

@@ -4,7 +4,7 @@ import OverviewProvider from "@/providers/overview-provider";
 import prisma from "@/lib/prisma";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
-import { Drawer } from "@/components/ui/drawer";
+import React from "react";
 
 export default async function Overview({
   params,
@@ -35,7 +35,10 @@ export default async function Overview({
 
   return (
     <OverviewProvider images={images} galleries={galleries}>
-      {getComponentBySlug(params.slug)}
+      {React.cloneElement(
+            getComponentBySlug(params.slug),
+            { params, session }
+        )}
     </OverviewProvider>
   );
 }
