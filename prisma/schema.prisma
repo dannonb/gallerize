@@ -16,16 +16,16 @@ datasource db {
 }
 
 model User {
-  id            String          @id @default(cuid())
-  name          String?
-  email         String          @unique
-  emailVerified DateTime?
-  image         String?
-  subscriptionId  String?
-  accounts      Account[]
-  sessions      Session[]
+  id             String          @id @default(cuid())
+  name           String?
+  email          String          @unique
+  emailVerified  DateTime?
+  image          String?
+  subscriptionId String?
+  accounts       Account[]
+  sessions       Session[]
   // Optional for WebAuthn support
-  Authenticator Authenticator[]
+  Authenticator  Authenticator[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -111,18 +111,20 @@ model Gallery {
 }
 
 model Image {
-  id         String   @id @default(uuid())
-  src        String
-  link       String
-  alt        String
-  siteId     String
-  site       Site     @relation("SiteToImage", fields: [siteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  galleryId  String
-  gallery    Gallery  @relation("GalleryToImage", fields: [galleryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
-  isArchived Boolean
-  isDraft    Boolean
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
+  id          String   @id @default(uuid())
+  src         String
+  link        String
+  alt         String
+  description String
+  tags        String[]
+  siteId      String
+  site        Site     @relation("SiteToImage", fields: [siteId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  galleryId   String
+  gallery     Gallery  @relation("GalleryToImage", fields: [galleryId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  isArchived  Boolean
+  isDraft     Boolean
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 
   @@index([siteId])
   @@index([galleryId])

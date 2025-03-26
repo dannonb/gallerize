@@ -51,12 +51,12 @@ export function ContactForm() {
           name="email"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Email</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input  {...field} />
               </FormControl>
               <FormDescription>
-                This is your public display name.
+                Your email address
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -67,12 +67,12 @@ export function ContactForm() {
           name="subject"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Subject</FormLabel>
               <FormControl>
-                <Input placeholder="shadcn" {...field} />
+                <Input  {...field} />
               </FormControl>
               <FormDescription>
-                This is your public display name.
+                The subject of your message
               </FormDescription>
               <FormMessage />
             </FormItem>
@@ -83,12 +83,12 @@ export function ContactForm() {
           name="message"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Username</FormLabel>
+              <FormLabel>Message</FormLabel>
               <FormControl>
-                <Textarea placeholder="shadcn" {...field} />
+                <Textarea {...field} />
               </FormControl>
               <FormDescription>
-                This is your public display name.
+                The message you would like to send us
               </FormDescription>
               <FormMessage />
             </FormItem>

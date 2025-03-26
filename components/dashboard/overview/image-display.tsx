@@ -31,6 +31,7 @@ export default function ImageDisplay({ images }: ImageDisplayProps) {
                   className="object-cover"
                   alt="Image"
                   src={image?.src}
+                  loading="lazy"
                 />
               </Button>
             ))}

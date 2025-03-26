@@ -3,7 +3,7 @@ export default function GettingStartedPage() {
     <div>
       <div className="min-h-screen p-6">
     
-        <main className="max-w-4xl mx-auto mt-8 space-y-8">
+        <main className="lg:max-w-4xl mx-auto mt-8 space-y-8">
           {/* Getting Started */}
           <section>
             <h2 className="text-3xl font-semibold">
@@ -144,7 +144,7 @@ export default function GettingStartedPage() {
             <ol className="list-decimal list-inside mt-2 space-y-2">
               <li>
                 Use the API endpoint for your gallery:
-                <pre className="bg-[#2323] p-4 rounded-md mt-2">
+                <pre className="bg-[#1B1B1F] text-white p-4 rounded-md mt-2 overflow-x-scroll md:overflow-x-hidden">
                   <code>
                     GET https://api.yourappurl.com/v1/sites/{"{site_id}"}
                     /galleries/{"{gallery_id}"}/images
@@ -153,13 +153,13 @@ export default function GettingStartedPage() {
               </li>
               <li>
                 Include your API key in the request header:
-                <pre className="bg-[#2323] p-4 rounded-md mt-2">
+                <pre className="bg-[#1B1B1F] text-white p-4 rounded-md mt-2">
                   <code>x-api-key: YOUR_API_KEY</code>
                 </pre>
               </li>
               <li>
                 The response will include image data in JSON format:
-                <pre className="bg-[#2323] p-4 rounded-md mt-2">
+                <pre className="bg-[#1B1B1F] text-white p-4 rounded-md mt-2 overflow-x-scroll md:overflow-x-hidden">
                   <code>
                     {`{
     "images": [
