@@ -115,7 +115,7 @@ export default function Navbar({ isLoggedIn }: NavbarProps) {
                 href="/"
                 className="flex items-center gap-2 text-lg font-semibold"
               >
-                <ImageIcon className="h-6 w-6" />
+                <Image src="/logo.png" alt="logo" height={70} width={70} />
                 <span className="sr-only">Gallerease</span>
               </Link>
             </SheetClose>
