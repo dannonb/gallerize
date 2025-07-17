@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
+import { Button } from "../ui/button";
 
 export default function DashboardNavbar() {
   const pathname = usePathname();
@@ -41,7 +42,7 @@ export default function DashboardNavbar() {
     ],
     documentation: [
       {
-        name: "Uploading Images",
+        name: "Uploads",
         href: "/documentation/uploading-images",
       },
       {
@@ -80,9 +81,11 @@ export default function DashboardNavbar() {
   return (
     <nav className="flex overflow-scroll md:overflow-hidden text-nowrap md:grid gap-4 text-sm text-muted-foreground">
       {links[determineLinkType()].map((link) => (
-        <Link key={link.href} href={`/dashboard/${params.siteId}${link.href}`} className={pathname === `/dashboard/${params.siteId}${link.href}` ? "font-semibold text-primary" : ""}>
-          {link.name}
-        </Link>
+        <Button asChild variant='outline' size='sm' key={link.href} className="w-1/2">
+          <Link href={`/dashboard/${params.siteId}${link.href}`} className={pathname === `/dashboard/${params.siteId}${link.href}` ? "font-semibold text-primary" : ""}>
+            {link.name}
+          </Link>
+        </Button>
       ))}
     </nav>
   );

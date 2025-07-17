@@ -83,7 +83,6 @@ export default function Navbar({ isLoggedIn }: NavbarProps) {
           href="/"
           className="flex items-center gap-2 text-lg font-semibold md:text-base transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-200"
         >
-          {/* <ImageIcon className="h-6 w-6" /> */}
           <Image src="/logo.png" alt="logo" height={70} width={70} />
           <span className="sr-only">Gallerease</span>
         </Link>
