@@ -43,7 +43,7 @@ export const getTotalStorageSize = async (siteId: string) => {
         }
 
         for (let i = 0; i < images.length; i++) {
-            const resp = await fetch(images[i].src)
+            const resp = await fetch(images[i].cdnUrl)
             const imageData = await resp.blob()
 
             total += (imageData.size / 1_000_000)
