@@ -150,7 +150,7 @@ export default function EditImageForm({ image }: EditImageProps) {
           fill
           className="object-cover"
           alt="Image"
-          src={editImageModal.image?.src || ""}
+          src={editImageModal.image?.cdnUrl || ""}
         />
         <DrawerContent>
           <DrawerTitle className="sr-only">Edit Image</DrawerTitle>

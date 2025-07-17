@@ -18,7 +18,7 @@ export default function LandingHeading() {
             className="inline-flex justify-between items-center py-1 px-1 pr-4 mb-7 text-sm"
             role="alert"
           >
-            <span className="text-xs bg-gradient-to-tr from-[#FFA457] via-[#DC5EB5] to-[#00ADF4] rounded-full text-white px-4 py-1.5 mr-3">
+            <span className="text-xs bg-gallerease-gradient rounded-full text-white px-4 py-1.5 mr-3">
               New
             </span>{" "}
             <span className="text-sm font-medium">
@@ -38,8 +38,8 @@ export default function LandingHeading() {
             </svg>
           </Link>
         </Button>
-        <h2 className="text-6xl text-center font-bold w-full mx-auto drop-shadow-lg">
-          <span className="bg-gradient-to-tr from-[#FFA457] via-[#DC5EB5] to-[#00ADF4] text-transparent bg-clip-text">
+        <h2 className="text-6xl lg:text-[96px] text-center font-bold w-full mx-auto drop-shadow-lg">
+          <span className="bg-gallerease-gradient text-transparent bg-clip-text">
             Gallerease
           </span>{" "}
           for Freelancers

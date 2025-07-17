@@ -18,6 +18,6 @@ export default function Heading() {
         }
     }
     return (
-        <h2 className="text-3xl font-semibold">{getHeading()}</h2>
+        <h2 className="text-3xl font-semibold hidden md:flex">{getHeading()}</h2>
     )
 }

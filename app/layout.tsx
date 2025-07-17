@@ -5,10 +5,10 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import { ToasterProvider } from "@/providers/toast-provider";
 import type { Metadata } from "next";
 import { SessionProvider } from "next-auth/react";
-import { Inter } from "next/font/google";
+import { Sora } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Sora({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Gallerease",

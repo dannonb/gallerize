@@ -58,8 +58,8 @@ export default function SiteSwitcher({
                     aria-label="Select a site"
                     className={cn('w-[150px] md:w-[200px] justify-between', className)}
                 >
-                    <Computer className="mr-2 h-4 w-4" />
-                    {currentSite?.label}
+                    <Computer className="mr-2 h-4 w-4 hidden md:flex" />
+                    <span className="truncate">{currentSite?.label}</span>
                     <ChevronsUpDown className="ml-auto h-4 w-4 shrink-0 opacity-50"/>
                 </Button>
             </PopoverTrigger>
@@ -75,8 +75,8 @@ export default function SiteSwitcher({
                                     onSelect={() => onSiteSelect(site)}
                                     className="text-sm"
                                 >
-                                    <Computer className="mr-2 h-4 w-4" />
-                                    {site.label}
+                                    <Computer className="mr-2 h-4 w-4 hidden md:flex" />
+                                    <span className="truncate">{site.label}</span>
                                     <CheckIcon className={cn(
                                         'ml-auto h-4 w-4', 
                                         currentSite?.value === site.value
@@ -97,7 +97,7 @@ export default function SiteSwitcher({
                                 }}
                             >
                                 <PlusCircle className="mr-2 h-5 w-5" />
-                                Create New Site
+                                Create
                             </CommandItem>
                         </CommandGroup>
                     </CommandList>

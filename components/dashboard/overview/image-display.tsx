@@ -30,7 +30,7 @@ export default function ImageDisplay({ images }: ImageDisplayProps) {
                   fill
                   className="object-cover"
                   alt="Image"
-                  src={image?.src}
+                  src={image?.cdnUrl}
                   loading="lazy"
                 />
               </Button>

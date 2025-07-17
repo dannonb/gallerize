@@ -15,7 +15,7 @@ export default function UploadPage() {
     <div className="flex flex-col space-y-4">
       <div className="flex items-center justify-between">
         <Heading title={title} description={description} />
-        <Button className="bg-gradient-to-tr from-indigo-800 via-blue-600 to-cyan-400 text-white" onClick={() => tempUpload.onOpen()}>
+        <Button className="bg-[#4caf50] text-white" onClick={() => tempUpload.onOpen()}>
           Temp Link
         </Button>
       </div>
