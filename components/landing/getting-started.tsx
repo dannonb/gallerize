@@ -133,7 +133,7 @@ function StepCard({
 
 function CodeBlock({ children }: { children: string }) {
     return (
-        <pre className="bg-gray-900 text-gray-100 text-sm rounded-lg p-4 overflow-x-auto whitespace-pre-wrap">
+        <pre className="bg-[#1B1B1F] text-gray-100 text-sm rounded-lg p-4 overflow-x-auto whitespace-pre-wrap">
             {children}
         </pre>
     );
