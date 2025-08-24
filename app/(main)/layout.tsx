@@ -1,4 +1,5 @@
 import Header from "@/components/header/header";
+import { Analytics } from "@vercel/analytics/next"
 
 export default function MainLayout({
   children,
@@ -7,6 +8,7 @@ export default function MainLayout({
 }) {
   return (
     <div className="w-full h-screen flex flex-col">
+      <Analytics />
       <Header />
       {children}
     </div>
